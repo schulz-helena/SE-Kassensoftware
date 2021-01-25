@@ -127,7 +127,7 @@ public class test extends JFrame {
 		startPanel.setVisible(false);
 		actionPanel.add(startPanel);
 		
-		produktPanel = new StartPanel();
+		produktPanel = new ProduktHinzufuegenPanel();
 		produktPanel.setVisible(false);
 		actionPanel.add(produktPanel);
 		
@@ -136,6 +136,14 @@ public class test extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				aktualisieren(startPanel);
+			}
+		});
+		
+		produkteButton.addActionListener(new ActionListener ()
+		{ 
+			public void actionPerformed(ActionEvent e)
+			{
+				aktualisieren(produktPanel);
 			}
 		});
 	}
