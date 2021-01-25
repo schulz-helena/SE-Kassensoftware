@@ -60,7 +60,7 @@ public final class JSONDemo {
 	    map.put("Gewicht", p.getGewicht().toString());
 	    map.put("Grundpreis", p.getGrundpreis().toString());
 	    map.put("Anzahl", p.getAnzahl().toString());
-	    map.put("Kategorie", p.getKategorie().getName());
+	    map.put("Kategorie", p.getKategorie().getKategorieName());
 	    
 	    // JSONObject erzeugen
 	    JSONObject jsonObject = new JSONObject(map);
@@ -116,7 +116,7 @@ public final class JSONDemo {
 		Map<String, String> map = new HashMap<>();
 		
 		// Eigenschaften übernehmen
-		map.put("Name", k.getName());
+		map.put("Name", k.getKategorieName());
 		
 		// neues JSONObject erzeugen
 		JSONObject jsonObject = new JSONObject(map);
@@ -166,7 +166,6 @@ public final class JSONDemo {
 	    	JSONParser parser = new JSONParser();
 	    	JSONObject obj = (JSONObject) parser.parse(new FileReader(dataPath));
 	    	JSONArray list = (JSONArray) obj.get("products");
-	    	Produkt produkt = new Produkt();
 	    	
 	    	// Suche nach passenden Eintrag
 	    	Iterator<JSONObject> iter = list.iterator();
@@ -176,14 +175,12 @@ public final class JSONDemo {
 	    		
 	    		// Falls das Produkt mit der gleichen EAN gefunden wurde
 	    		if (ean.compareTo(item.get("EAN").toString()) == 0) {
-	    			produkt.setEan(item.get("EAN").toString());
-	    			produkt.setName(item.get("Name").toString());
-	    			produkt.setPreis(Float.parseFloat(item.get("Preis").toString()));
-	    			produkt.setGewicht(Float.parseFloat(item.get("Gewicht").toString()));
-	    			produkt.setGrundpreis(produkt.getGewicht(),Float.parseFloat(item.get("Grundpreis").toString()));
-	    			produkt.setAnzahl(Integer.parseInt(item.get("Anzahl").toString()));
-	    			produkt.setKategorie(new Kategorie(item.get("Kategorie").toString()));
-	    			return produkt;
+	    			String name = item.get("Name").toString();
+	    			Float preis = Float.parseFloat(item.get("Preis").toString());
+	    			Float gewicht = Float.parseFloat(item.get("Gewicht").toString());
+	    			Integer anzahl = Integer.parseInt(item.get("Anzahl").toString());
+	    			Kategorie kategorie = new Kategorie(item.get("Kategorie").toString());
+	    			return new Produkt(name, ean, preis, gewicht, anzahl, kategorie);
 	    		}
 	    	}
 	    }
@@ -217,7 +214,6 @@ public final class JSONDemo {
 	    	JSONParser parser = new JSONParser();
 	    	JSONObject obj = (JSONObject) parser.parse(new FileReader(dataPath));
 	    	JSONArray list = (JSONArray) obj.get("categories");
-	    	Kategorie kategorie = new Kategorie();
 	    	
 	    	Iterator<JSONObject> iter = list.iterator();
 	    	
@@ -226,8 +222,7 @@ public final class JSONDemo {
 	    		
 	    		// Falls die Kategorie mit dem Namen gefunden wurde
 	    		if (name.compareTo(item.get("Name").toString()) == 0) {
-	    			kategorie.setName(item.get("Name").toString());
-	    			return kategorie;
+	    			return new Kategorie(item.get("Name").toString());
 	    		}
 	    	}
 	    }
@@ -308,7 +303,7 @@ public final class JSONDemo {
 	    	JSONObject obj = (JSONObject) parser.parse(new FileReader(dataPath));
 	    	JSONArray list = (JSONArray) obj.get("categories");
 	    	boolean modified = false;
-	    	String name = kategorie.getName();
+	    	String name = kategorie.getKategorieName();
 	    	int index = 0;
 	    	
 	    	Iterator<JSONObject> iter = list.iterator();
