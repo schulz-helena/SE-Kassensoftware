@@ -1,5 +1,6 @@
+package kassensoftware;
+
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import java.awt.GridLayout;
 import java.awt.Font;

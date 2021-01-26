@@ -1,3 +1,5 @@
+package kassensoftware;
+
 
 
 public class Einkauf {

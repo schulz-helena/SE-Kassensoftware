@@ -1,3 +1,5 @@
+package kassensoftware;
+
 import java.util.ArrayList;
 
 public class Einkaufsliste {

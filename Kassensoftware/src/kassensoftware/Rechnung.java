@@ -1,3 +1,5 @@
+package kassensoftware;
+
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -36,7 +38,7 @@ public class Rechnung {
 				System.out.println("---------------------------------------------");
 				System.out.println(String.format("%34s %6.2f EUR", "Gesamtsumme: ", gesamtSumme));
 				System.out.println(String.format("%34s %6.2f EUR", "Erhalten: ", brieftasche));
-				System.out.println(String.format("%34s %6.2f EUR", "Rückgeld: ", rueckgeld));
+				System.out.println(String.format("%34s %6.2f EUR", "Rï¿½ckgeld: ", rueckgeld));
 				
 			}
 		}
