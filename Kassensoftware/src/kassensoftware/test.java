@@ -23,7 +23,8 @@ import java.awt.event.ActionListener;
 public class test extends JFrame {
 
 	private JPanel contentPane;
-	private JPanel startPanel, produktPanel;
+	private JPanel startPanel, produktPanel, kategoriePanel, einkaufPanel;
+	private int active = 0; // aktives Panel: 0: kein Panel; 1: StartPanel; 2: ProduktPanel; ...
 
 	/**
 	 * Launch the application.
@@ -78,6 +79,11 @@ public class test extends JFrame {
 		JButton einkaufButton = new JButton("Einkauf");
 		einkaufButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		einkaufButton.setForeground(new Color(64, 116, 161));
+		
+		JButton sucheButton = new JButton("Suchen");
+		sucheButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		sucheButton.setForeground(new Color(64, 116, 161));
+		
 		GroupLayout gl_menuPanel = new GroupLayout(menuPanel);
 		gl_menuPanel.setHorizontalGroup(
 			gl_menuPanel.createParallelGroup(Alignment.LEADING)
@@ -88,6 +94,7 @@ public class test extends JFrame {
 						.addComponent(produkteButton, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
 						.addComponent(kategorieButton, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
 						.addComponent(einkaufButton, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+						.addComponent(sucheButton, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
 						.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addContainerGap())
 		);
@@ -104,28 +111,23 @@ public class test extends JFrame {
 					.addComponent(kategorieButton, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(einkaufButton, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(98, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(sucheButton, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED))
 		);
 		menuPanel.setLayout(gl_menuPanel);
 		
-		JPanel actionPanel = new JPanel();
-		actionPanel.setForeground(Color.WHITE);
-		actionPanel.setLayout(new BorderLayout(0, 0));
-		contentPane.add(actionPanel, BorderLayout.CENTER);
-		
 		// Ansichten hinzufügen
 		startPanel = new StartPanel();
-		startPanel.setVisible(false);
-		actionPanel.add(startPanel);
-		
 		produktPanel = new ProduktHinzufuegenPanel();
-		produktPanel.setVisible(false);
-		actionPanel.add(produktPanel);
+		kategoriePanel = new KategoriePanel();
+		einkaufPanel = new EinkaufPanel();
 		
 		startButton.addActionListener(new ActionListener ()
 		{ 
 			public void actionPerformed(ActionEvent e)
 			{
+				active = 1;
 				aktualisieren(startPanel);
 			}
 		});
@@ -134,7 +136,24 @@ public class test extends JFrame {
 		{ 
 			public void actionPerformed(ActionEvent e)
 			{
+				active = 2;
 				aktualisieren(produktPanel);
+			}
+		});
+		
+		kategorieButton.addActionListener(new ActionListener ()
+		{ 
+			public void actionPerformed(ActionEvent e)
+			{
+				aktualisieren(kategoriePanel);
+			}
+		});
+		
+		einkaufButton.addActionListener(new ActionListener ()
+		{ 
+			public void actionPerformed(ActionEvent e)
+			{
+				aktualisieren(einkaufPanel);
 			}
 		});
 	}
@@ -145,11 +164,15 @@ public class test extends JFrame {
 	 */
 	public void aktualisieren(JPanel panel)
 	{
-		// alle Panels unsichtbar machen
-		startPanel.setVisible(false);
-		produktPanel.setVisible(false);
+		// alle aktiven Panels entfernen
+		contentPane.remove(startPanel);
+		contentPane.remove(produktPanel);
+		contentPane.remove(kategoriePanel);
+		contentPane.remove(einkaufPanel);
 		
-		// das neue Panel wird sichtbar
-		panel.setVisible(true);
+		// das neue Panel hinzufügen
+		contentPane.add(panel, BorderLayout.CENTER);
+		contentPane.revalidate();
+		contentPane.repaint();
 	}
 }
