@@ -1,6 +1,6 @@
 package kassensoftware;
 
-//package demo;
+//package demo
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -8,26 +8,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
 import java.awt.Color;
-import javax.swing.JMenuItem;
 import javax.swing.JButton;
-import javax.swing.BoxLayout;
-import java.awt.GridLayout;
 import javax.swing.JLabel;
-import java.awt.Window.Type;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.SystemColor;
-import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Action;
 
 public class test extends JFrame {
 
