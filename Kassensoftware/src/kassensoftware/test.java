@@ -7,10 +7,12 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.GroupLayout;
@@ -23,7 +25,7 @@ import java.awt.event.ActionListener;
 public class test extends JFrame {
 
 	private JPanel contentPane;
-	private JPanel startPanel, produktPanel, kategoriePanel, einkaufPanel;
+	private JPanel startPanel, neuesProduktPanel, bestehendesProduktPanel, kategoriePanel, einkaufPanel;
 	private int active = 0; // aktives Panel: 0: kein Panel; 1: StartPanel; 2: ProduktPanel; ...
 
 	/**
@@ -68,11 +70,15 @@ public class test extends JFrame {
 		startButton.setForeground(new Color(64, 116, 161));
 		startButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		
-		JButton produkteButton = new JButton("Produkte");
-		produkteButton.setForeground(new Color(64, 116, 161));
-		produkteButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		JButton neueProdukteButton = new JButton("Neue Produkte");
+		neueProdukteButton.setForeground(new Color(64, 116, 161));
+		neueProdukteButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		
-		JButton kategorieButton = new JButton("Kategorie");
+		JButton bestehendeProdukteButton = new JButton("Bestehende Produkte");
+		bestehendeProdukteButton.setForeground(new Color(64, 116, 161));
+		bestehendeProdukteButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		
+		JButton kategorieButton = new JButton("Kategorien");
 		kategorieButton.setForeground(new Color(64, 116, 161));
 		kategorieButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		
@@ -91,7 +97,8 @@ public class test extends JFrame {
 					.addContainerGap()
 					.addGroup(gl_menuPanel.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(startButton, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-						.addComponent(produkteButton, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+						.addComponent(neueProdukteButton, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+						.addComponent(bestehendeProdukteButton, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
 						.addComponent(kategorieButton, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
 						.addComponent(einkaufButton, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
 						.addComponent(sucheButton, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
@@ -106,7 +113,9 @@ public class test extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(startButton, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(produkteButton, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+					.addComponent(neueProdukteButton, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(bestehendeProdukteButton, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(kategorieButton, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -119,7 +128,8 @@ public class test extends JFrame {
 		
 		// Ansichten hinzufügen
 		startPanel = new StartPanel();
-		produktPanel = new ProduktHinzufuegenPanel();
+		neuesProduktPanel = new ProduktHinzufuegenPanel();
+		bestehendesProduktPanel = new ProduktBearbeitenPanel();
 		kategoriePanel = new KategoriePanel();
 		einkaufPanel = new EinkaufPanel();
 		
@@ -132,12 +142,38 @@ public class test extends JFrame {
 			}
 		});
 		
-		produkteButton.addActionListener(new ActionListener ()
+		neueProdukteButton.addActionListener(new ActionListener ()
 		{ 
 			public void actionPerformed(ActionEvent e)
 			{
-				active = 2;
-				aktualisieren(produktPanel);
+				JPasswordField passwordField = new JPasswordField(10);
+		        passwordField.setEchoChar('•');
+		        JOptionPane.showMessageDialog(null, passwordField, "Bitte Passwort eingeben", JOptionPane.OK_OPTION);
+		        String passwort = "filialleiter";
+		        String s = String.valueOf(passwordField.getPassword());
+		        if (s.equals(passwort)) {
+		        	active = 2;
+					aktualisieren(neuesProduktPanel);
+		        } else {
+		        	JOptionPane.showMessageDialog(null, "Falsches Passwort", "Zutritt verwährt", JOptionPane.ERROR_MESSAGE);
+		        }
+			}
+		});
+		
+		bestehendeProdukteButton.addActionListener(new ActionListener ()
+		{ 
+			public void actionPerformed(ActionEvent e)
+			{
+				JPasswordField passwordField = new JPasswordField(10);
+		        passwordField.setEchoChar('•');
+		        JOptionPane.showMessageDialog(null, passwordField, "Bitte Passwort eingeben", JOptionPane.OK_OPTION);
+		        String passwort = "filialleiter";
+		        String s = String.valueOf(passwordField.getPassword());
+		        if (s.equals(passwort)) {
+					aktualisieren(bestehendesProduktPanel);
+		        } else {
+		        	JOptionPane.showMessageDialog(null, "Falsches Passwort", "Zutritt verwährt", JOptionPane.ERROR_MESSAGE);
+		        }
 			}
 		});
 		
@@ -145,7 +181,16 @@ public class test extends JFrame {
 		{ 
 			public void actionPerformed(ActionEvent e)
 			{
-				aktualisieren(kategoriePanel);
+				JPasswordField passwordField = new JPasswordField(10);
+		        passwordField.setEchoChar('•');
+		        JOptionPane.showMessageDialog(null, passwordField, "Bitte Passwort eingeben", JOptionPane.OK_OPTION);
+		        String passwort = "filialleiter";
+		        String s = String.valueOf(passwordField.getPassword());
+		        if (s.equals(passwort)) {
+		        	aktualisieren(kategoriePanel);
+		        } else {
+		        	JOptionPane.showMessageDialog(null, "Falsches Passwort", "Zutritt verwährt", JOptionPane.ERROR_MESSAGE);
+		        }
 			}
 		});
 		
@@ -166,7 +211,8 @@ public class test extends JFrame {
 	{
 		// alle aktiven Panels entfernen
 		contentPane.remove(startPanel);
-		contentPane.remove(produktPanel);
+		contentPane.remove(neuesProduktPanel);
+		contentPane.remove(bestehendesProduktPanel);
 		contentPane.remove(kategoriePanel);
 		contentPane.remove(einkaufPanel);
 		
