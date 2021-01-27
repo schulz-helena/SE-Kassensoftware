@@ -44,10 +44,6 @@ public final class JSONDemo {
 	 * 			sonst <code>false</code> 
 	 */	
 	public static boolean produktSpeichern(Produkt produkt) {
-		if (!dataFile.exists()) {
-			createDataFile();
-		}
-		
 		// Keine leeren Produkte speichern
 		if (produkt == null) {
 			return false;
@@ -110,10 +106,6 @@ public final class JSONDemo {
 	 * 			sonst <code>false</code> 
 	 */	
 	public static boolean kategorieSpeichern(Kategorie kategorie) {
-		if (!dataFile.exists()) {
-			createDataFile();
-		}
-		
 		// Keine leeren Kategorien speichern
 		if (kategorie == null) {
 			return false;
@@ -373,6 +365,10 @@ public final class JSONDemo {
 	 * 				<code>null</code>, falls kein Eintrag vorhanden war
 	 */
 	private static JSONArray readData(String key) {
+		if (!dataFile.exists()) {
+			createDataFile();
+		}
+		
 		try {
 			JSONParser parser = new JSONParser();
 	    	JSONObject obj = (JSONObject) parser.parse(new FileReader(dataPath));
@@ -399,6 +395,10 @@ public final class JSONDemo {
 	 * 				<code>false</code>, falls die Daten nicht geschrieben werden konnten
 	 */
 	private static boolean writeData(String key, JSONArray list) {
+		if (!dataFile.exists()) {
+			createDataFile();
+		}
+		
 		try {
 			JSONParser parser = new JSONParser();
 	    	JSONObject obj = (JSONObject) parser.parse(new FileReader(dataPath));

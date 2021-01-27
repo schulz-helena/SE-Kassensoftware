@@ -1,3 +1,5 @@
+package kassensoftware;
+
 import java.util.ArrayList;
 
 public class Rechnung {
@@ -37,7 +39,7 @@ public class Rechnung {
 				rechnungEnd = "---------------------------------------------\n"
 						+ String.format("%34s %6.2f EUR\n", "Gesamtsumme: ", gesamtSumme)
 						+ String.format("%34s %6.2f EUR\n", "Erhalten: ", brieftasche)
-						+ String.format("%34s %6.2f EUR\n", "Rückgeld: ", rueckgeld);
+						+ String.format("%34s %6.2f EUR\n", "Rï¿½ckgeld: ", rueckgeld);
 			}
 		}
 

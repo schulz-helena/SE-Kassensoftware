@@ -1,3 +1,5 @@
+package kassensoftware;
+
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import java.awt.GridLayout;
@@ -115,7 +117,7 @@ public class KategoriePanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				kName = textField_1.getText();
 				for (Kategorie kat : JSONDemo.getAllCategories()) {
-					if (kat.getKategorieName() == kName) {
+					if (kat.getKategorieName().compareTo(kName) == 0) {
 						JSONDemo.kategorieEntfernen(kat);
 					}
 				}
