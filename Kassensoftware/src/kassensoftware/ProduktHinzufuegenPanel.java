@@ -29,11 +29,13 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dialog;
 import static javax.swing.JOptionPane.*;
-
+/**
+ * Über das ProduktHinzufuegenPanel kann der Nutzer die Produkteigenschaften selbst wählen
+ * und mit diesen Eigenschaften ein Produkt erstellen
+ * @author Helena Schulz
+ */
 public class ProduktHinzufuegenPanel extends JPanel {
-	/**
-	 * 
-	 */
+
 	private JTextField name_txt;
 	private JTextField ean_txt;
 	private JTextField gewicht_txt;
@@ -75,30 +77,26 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		name_txt.setFont(new Font("Verdana", Font.PLAIN, 13));
 		name_txt.addFocusListener(new FocusListener() {
 			@Override
-			public void focusGained(FocusEvent n) {
-				//name_txt.requestFocus();
+			public void focusGained(FocusEvent e) {
+				
 	        }
 			@Override
-			public void focusLost(FocusEvent n) {
-				/*if (abbrechen_btn.hasFocus()) {
-					name_txt.setText(null);
-				} else {*/
-					String name = name_txt.getText();
-					for (int i = 0; i < name.length(); i++) {
-				        if(Character.isDigit(name.charAt(i))) {
-				        	JOptionPane.showMessageDialog(null, "Der eingegebene Name darf keine Ziffern enthalten.", "Fehler bei Namens-Eingabe", JOptionPane.ERROR_MESSAGE);
-				        	name_txt.requestFocus();
-				        	break;
-				        }
+			public void focusLost(FocusEvent e) {
+				String name = name_txt.getText();
+				for (int i = 0; i < name.length(); i++) {
+					if(Character.isDigit(name.charAt(i))) {
+				        JOptionPane.showMessageDialog(null, "Der eingegebene Name darf keine Ziffern enthalten.", "Fehler bei Namens-Eingabe", JOptionPane.ERROR_MESSAGE);
+				        name_txt.requestFocus();
+				        break;
 				    }
-					if (name.length() >0 && name.length() < 2) {
-						JOptionPane.showMessageDialog(null, "Der eingegebene Name ist zu kurz.", "Fehler bei Namens-Eingabe", JOptionPane.ERROR_MESSAGE);
-						name_txt.requestFocus();
-					}
-					else if (name.length() > 32) {
-						name_txt.requestFocus();
-					}
-				//}
+				}
+				if (name.length() >0 && name.length() < 2) {
+					JOptionPane.showMessageDialog(null, "Der eingegebene Name ist zu kurz.", "Fehler bei Namens-Eingabe", JOptionPane.ERROR_MESSAGE);
+					name_txt.requestFocus();
+				}
+				else if (name.length() > 32) {
+					name_txt.requestFocus();
+				}
 			}
 		});
 		GridBagConstraints gbc_name_txt = new GridBagConstraints();
@@ -134,41 +132,37 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		ean_txt.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				//ean_txt.requestFocus();
+				
 	        }
 			@Override
 			public void focusLost(FocusEvent e) {
-				/*if(abbrechen_btn.hasFocus()) {
-					ean_txt.setText(null);
-				} else {*/
-					String ean = ean_txt.getText();
-					for (int i = 0; i < ean.length(); i++) {
-				        if(Character.isDigit(ean.charAt(i)) == false) {
-				        	JOptionPane.showMessageDialog(null, "Die eingegebene EAN darf nur Ziffern enthalten.", "Fehler bei EAN-Eingabe", JOptionPane.ERROR_MESSAGE);
-				        	ean_txt.requestFocus();
-				        	break;
-				        }
-				    }
-					ArrayList<Produkt> produkte = JSONDemo.getAllProducts();
-					int size = produkte.size();
-					String produktListe[] = new String[size];
-					for (int i = 0; i < size; i++) { 
-			            produktListe[i] = produkte.get(i).getEan();
-			            if (produktListe[i].equals(ean)) {
-			            	JOptionPane.showMessageDialog(null, "Es ist bereits ein Produkt mit der eingegebenen EAN vorhanden.", "Fehler bei EAN-Eingabe", JOptionPane.ERROR_MESSAGE);
-			            	ean_txt.requestFocus();
-			            	break;
-			            }
-					}
-					if (ean_box.getSelectedItem() == "EAN-8" && ean_txt.getText().length() > 8) {
-						JOptionPane.showMessageDialog(null, "Die eingegebene EAN ist zu lang.", "Fehler bei EAN-Eingabe", JOptionPane.ERROR_MESSAGE);
-						ean_txt.requestFocus();
-					}
-					else if (ean_box.getSelectedItem() == "EAN-13" && ean_txt.getText().length() > 13) {
-						JOptionPane.showMessageDialog(null, "Die eingegebene EAN ist zu lang.", "Fehler bei EAN-Eingabe", JOptionPane.ERROR_MESSAGE);
-						ean_txt.requestFocus();
-					}
-				//}
+				String ean = ean_txt.getText();
+				for (int i = 0; i < ean.length(); i++) {
+			        if(Character.isDigit(ean.charAt(i)) == false) {
+			        	JOptionPane.showMessageDialog(null, "Die eingegebene EAN darf nur Ziffern enthalten.", "Fehler bei EAN-Eingabe", JOptionPane.ERROR_MESSAGE);
+			        	ean_txt.requestFocus();
+			        	break;
+			        }
+			    }
+				ArrayList<Produkt> produkte = JSONDemo.getAllProducts();
+				int size = produkte.size();
+				String produktListe[] = new String[size];
+				for (int i = 0; i < size; i++) { 
+		            produktListe[i] = produkte.get(i).getEan();
+		            if (produktListe[i].equals(ean)) {
+		            	JOptionPane.showMessageDialog(null, "Es ist bereits ein Produkt mit der eingegebenen EAN vorhanden.", "Fehler bei EAN-Eingabe", JOptionPane.ERROR_MESSAGE);
+		            	ean_txt.requestFocus();
+		            	break;
+		            }
+				}
+				if (ean_box.getSelectedItem() == "EAN-8" && ean_txt.getText().length() > 8) {
+					JOptionPane.showMessageDialog(null, "Die eingegebene EAN ist zu lang.", "Fehler bei EAN-Eingabe", JOptionPane.ERROR_MESSAGE);
+					ean_txt.requestFocus();
+				}
+				else if (ean_box.getSelectedItem() == "EAN-13" && ean_txt.getText().length() > 13) {
+					JOptionPane.showMessageDialog(null, "Die eingegebene EAN ist zu lang.", "Fehler bei EAN-Eingabe", JOptionPane.ERROR_MESSAGE);
+					ean_txt.requestFocus();
+				}
 			}
 		});
 		ean_txt.setColumns(10);
@@ -204,62 +198,56 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gewicht_txt.setFont(new Font("Verdana", Font.PLAIN, 13));
 		gewicht_txt.addFocusListener(new FocusListener() {
 			@Override
-			public void focusGained(FocusEvent g) {
-				//gewicht_txt.requestFocus();
+			public void focusGained(FocusEvent e) {
+				
 	        }
 			@Override
-			public void focusLost(FocusEvent g) {
-				/*if (abbrechen_btn.hasFocus()) {
-					gewicht_txt.setText(null);
-				} else {*/
-					Float gewicht = 0.0f;
-					String gewichtsString = gewicht_txt.getText();
-					if (gewichtsString.indexOf(',') != -1) {
-						gewichtsString = gewichtsString.replace(',', '.');
+			public void focusLost(FocusEvent e) {
+				Float gewicht = 0.0f;
+				String gewichtsString = gewicht_txt.getText();
+				if (gewichtsString.indexOf(',') != -1) {
+					gewichtsString = gewichtsString.replace(',', '.');
+				}
+				if (gewichtsString.length() > 0) {
+					try {
+						gewicht = Float.parseFloat(gewichtsString);
+					} catch(Exception ex) {
+						JOptionPane.showMessageDialog(null, "Keine gültige Zahl eingegeben.", "Fehler bei Gewichts-Eingabe", JOptionPane.ERROR_MESSAGE);
+						gewicht_txt.requestFocus();
 					}
-					if (gewichtsString.length() > 0) {
-						try {
-							gewicht = Float.parseFloat(gewichtsString);
-						} catch(Exception ex) {
-							JOptionPane.showMessageDialog(null, "Keine gültige Zahl eingegeben.", "Fehler bei Gewichts-Eingabe", JOptionPane.ERROR_MESSAGE);
-							gewicht_txt.requestFocus();
-						}
-						if (gewicht_box.getSelectedItem() == "kg" && gewicht < 0.001 && gewicht > 0) {
-							JOptionPane.showMessageDialog(null, "Das eingegebene Gewicht ist zu niedrig.", "Fehler bei Gewichts-Eingabe", JOptionPane.ERROR_MESSAGE);
-							gewicht_txt.requestFocus();
-						}
-						else if (gewicht_box.getSelectedItem() == "kg" && gewicht > 100) {
-							JOptionPane.showMessageDialog(null, "Das eingegebene Gewicht ist zu hoch.", "Fehler bei Gewichts-Eingabe", JOptionPane.ERROR_MESSAGE);
-							gewicht_txt.requestFocus();
-						}
-						else if (gewicht_box.getSelectedItem() == "g" && gewicht < 1 && gewicht > 0) {
-							JOptionPane.showMessageDialog(null, "Das eingegebene Gewicht ist zu niedrig.", "Fehler bei Gewichts-Eingabe", JOptionPane.ERROR_MESSAGE);
-							gewicht_txt.requestFocus();
-						}
-						else if (gewicht_box.getSelectedItem() == "g" && gewicht > 100000) {
-							JOptionPane.showMessageDialog(null, "Das eingegebene Gewicht ist zu hoch.", "Fehler bei Gewichts-Eingabe", JOptionPane.ERROR_MESSAGE);
-							gewicht_txt.requestFocus();
-						}
-						else if (gewicht_box.getSelectedItem() == "l" && gewicht < 0.001 && gewicht > 0) {
-							JOptionPane.showMessageDialog(null, "Das eingegebene Gewicht ist zu niedrig.", "Fehler bei Gewichts-Eingabe", JOptionPane.ERROR_MESSAGE);
-							gewicht_txt.requestFocus();
-						}
-						else if (gewicht_box.getSelectedItem() == "l" && gewicht > 10) {
-							JOptionPane.showMessageDialog(null, "Das eingegebene Gewicht ist zu hoch.", "Fehler bei Gewichts-Eingabe", JOptionPane.ERROR_MESSAGE);
-							gewicht_txt.requestFocus();
-						}
-						else if (gewicht_box.getSelectedItem() == "ml" && gewicht < 1 && gewicht > 0) {
-							JOptionPane.showMessageDialog(null, "Das eingegebene Gewicht ist zu niedrig.", "Fehler bei Gewichts-Eingabe", JOptionPane.ERROR_MESSAGE);
-							gewicht_txt.requestFocus();
-						}
-						else if (gewicht_box.getSelectedItem() == "ml" && gewicht > 10000) {
-							JOptionPane.showMessageDialog(null, "Das eingegebene Gewicht ist zu hoch.", "Fehler bei Gewichts-Eingabe", JOptionPane.ERROR_MESSAGE);
-							gewicht_txt.requestFocus();
-						}
+					if (gewicht_box.getSelectedItem() == "kg" && gewicht < 0.001 && gewicht > 0) {
+						JOptionPane.showMessageDialog(null, "Das eingegebene Gewicht ist zu niedrig.", "Fehler bei Gewichts-Eingabe", JOptionPane.ERROR_MESSAGE);
+						gewicht_txt.requestFocus();
 					}
-					
-				//}
-				
+					else if (gewicht_box.getSelectedItem() == "kg" && gewicht > 100) {
+						JOptionPane.showMessageDialog(null, "Das eingegebene Gewicht ist zu hoch.", "Fehler bei Gewichts-Eingabe", JOptionPane.ERROR_MESSAGE);
+						gewicht_txt.requestFocus();
+					}
+					else if (gewicht_box.getSelectedItem() == "g" && gewicht < 1 && gewicht > 0) {
+						JOptionPane.showMessageDialog(null, "Das eingegebene Gewicht ist zu niedrig.", "Fehler bei Gewichts-Eingabe", JOptionPane.ERROR_MESSAGE);
+						gewicht_txt.requestFocus();
+					}
+					else if (gewicht_box.getSelectedItem() == "g" && gewicht > 100000) {
+						JOptionPane.showMessageDialog(null, "Das eingegebene Gewicht ist zu hoch.", "Fehler bei Gewichts-Eingabe", JOptionPane.ERROR_MESSAGE);
+						gewicht_txt.requestFocus();
+					}
+					else if (gewicht_box.getSelectedItem() == "l" && gewicht < 0.001 && gewicht > 0) {
+						JOptionPane.showMessageDialog(null, "Das eingegebene Gewicht ist zu niedrig.", "Fehler bei Gewichts-Eingabe", JOptionPane.ERROR_MESSAGE);
+						gewicht_txt.requestFocus();
+					}
+					else if (gewicht_box.getSelectedItem() == "l" && gewicht > 10) {
+						JOptionPane.showMessageDialog(null, "Das eingegebene Gewicht ist zu hoch.", "Fehler bei Gewichts-Eingabe", JOptionPane.ERROR_MESSAGE);
+						gewicht_txt.requestFocus();
+					}
+					else if (gewicht_box.getSelectedItem() == "ml" && gewicht < 1 && gewicht > 0) {
+						JOptionPane.showMessageDialog(null, "Das eingegebene Gewicht ist zu niedrig.", "Fehler bei Gewichts-Eingabe", JOptionPane.ERROR_MESSAGE);
+						gewicht_txt.requestFocus();
+					}
+					else if (gewicht_box.getSelectedItem() == "ml" && gewicht > 10000) {
+						JOptionPane.showMessageDialog(null, "Das eingegebene Gewicht ist zu hoch.", "Fehler bei Gewichts-Eingabe", JOptionPane.ERROR_MESSAGE);
+						gewicht_txt.requestFocus();
+					}
+				}
 			}
 		});
 		gewicht_txt.setColumns(10);
@@ -285,36 +273,32 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		preis_txt.setFont(new Font("Verdana", Font.PLAIN, 13));
 		preis_txt.addFocusListener(new FocusListener() {
 			@Override
-			public void focusGained(FocusEvent p) {
-				//preis_txt.requestFocus();
+			public void focusGained(FocusEvent e) {
+				
 	        }
 			@Override
-			public void focusLost(FocusEvent p) {
-				/*if (abbrechen_btn.hasFocus()) {
-					preis_txt.setText(null);
-				} else {*/
-					Float preis = 0.0f;
-					String preisString = preis_txt.getText();
-					if (preisString.indexOf(',') != -1) {
-						preisString = preisString.replace(',', '.');
+			public void focusLost(FocusEvent e) {
+				Float preis = 0.0f;
+				String preisString = preis_txt.getText();
+				if (preisString.indexOf(',') != -1) {
+					preisString = preisString.replace(',', '.');
+				}
+				if (preisString.length() > 0) {
+					try {
+						preis = Float.parseFloat(preisString);
+					} catch(Exception ex) {
+						JOptionPane.showMessageDialog(null, "Keine gültige Zahl eingegeben.", "Fehler bei Preis-Eingabe", JOptionPane.ERROR_MESSAGE);
+						preis_txt.requestFocus();
 					}
-					if (preisString.length() > 0) {
-						try {
-							preis = Float.parseFloat(preisString);
-						} catch(Exception ex) {
-							JOptionPane.showMessageDialog(null, "Keine gültige Zahl eingegeben.", "Fehler bei Preis-Eingabe", JOptionPane.ERROR_MESSAGE);
-							preis_txt.requestFocus();
-						}
-						if (preis > 0 && preis < 0.01) {
-							JOptionPane.showMessageDialog(null, "Der eingegebene Preis ist zu niedrig.", "Fehler bei Preis-Eingabe", JOptionPane.ERROR_MESSAGE);
-							preis_txt.requestFocus();
-						}
-						else if (preis > 100000) {
-							JOptionPane.showMessageDialog(null, "Der eingegebene Preis ist zu hoch.", "Fehler bei Preis-Eingabe", JOptionPane.ERROR_MESSAGE);
-							preis_txt.requestFocus();
-						}
+					if (preis > 0 && preis < 0.01) {
+						JOptionPane.showMessageDialog(null, "Der eingegebene Preis ist zu niedrig.", "Fehler bei Preis-Eingabe", JOptionPane.ERROR_MESSAGE);
+						preis_txt.requestFocus();
 					}
-				//}
+					else if (preis > 100000) {
+						JOptionPane.showMessageDialog(null, "Der eingegebene Preis ist zu hoch.", "Fehler bei Preis-Eingabe", JOptionPane.ERROR_MESSAGE);
+						preis_txt.requestFocus();
+					}
+				}
 			}
 		});
 		preis_txt.setColumns(10);
@@ -358,33 +342,28 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		anzahl_txt.setFont(new Font("Verdana", Font.PLAIN, 13));
 		anzahl_txt.addFocusListener(new FocusListener() {
 			@Override
-			public void focusGained(FocusEvent b) {
-				//anzahl_txt.requestFocus();
+			public void focusGained(FocusEvent e) {
+				
 	        }
 			@Override
-			public void focusLost(FocusEvent b) {
-				/*if(abbrechen_btn.hasFocus()) {
-					anzahl_txt.setText(null);
-				} else {*/
-					Long anzahl = (long)0;
-					if (anzahl_txt.getText().length() > 0) {
-						try {
-							anzahl = Long.parseLong(anzahl_txt.getText());
-						} catch(Exception ex) {
-							JOptionPane.showMessageDialog(null, "Keine Nummer eingegeben.", "Fehler bei Anzahl-Eingabe", JOptionPane.ERROR_MESSAGE);
-							anzahl_txt.requestFocus();
-						}
-						if (anzahl_box.getSelectedItem() == "Stück" && anzahl > 1000) {
-							JOptionPane.showMessageDialog(null, "Die eingegebene Anzahl ist zu groß.", "Fehler bei Anzahl-Eingabe", JOptionPane.ERROR_MESSAGE);
-							anzahl_txt.requestFocus();
-						}
-						else if (anzahl_box.getSelectedItem() == "Gesamtgewicht" && anzahl > 100000) {
-							JOptionPane.showMessageDialog(null, "Das eingegebene Gesamtgewicht ist zu groß.", "Fehler bei Anzahl-Eingabe", JOptionPane.ERROR_MESSAGE);
-							anzahl_txt.requestFocus();
-						}
-						
+			public void focusLost(FocusEvent e) {
+				Long anzahl = (long)0;
+				if (anzahl_txt.getText().length() > 0) {
+					try {
+						anzahl = Long.parseLong(anzahl_txt.getText());
+					} catch(Exception ex) {
+						JOptionPane.showMessageDialog(null, "Keine Nummer eingegeben.", "Fehler bei Anzahl-Eingabe", JOptionPane.ERROR_MESSAGE);
+						anzahl_txt.requestFocus();
 					}
-				//}
+					if (anzahl_box.getSelectedItem() == "Stück" && anzahl > 1000) {
+						JOptionPane.showMessageDialog(null, "Die eingegebene Anzahl ist zu groß.", "Fehler bei Anzahl-Eingabe", JOptionPane.ERROR_MESSAGE);
+						anzahl_txt.requestFocus();
+					}
+					else if (anzahl_box.getSelectedItem() == "Gesamtgewicht" && anzahl > 100000) {
+						JOptionPane.showMessageDialog(null, "Das eingegebene Gesamtgewicht ist zu groß.", "Fehler bei Anzahl-Eingabe", JOptionPane.ERROR_MESSAGE);
+						anzahl_txt.requestFocus();
+					}
+				}
 			}
 		});
 		anzahl_txt.setColumns(10);
@@ -425,6 +404,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		JButton bestaetigen_btn = new JButton("Hinzufügen bestätigen");
 		bestaetigen_btn.setFont(new Font("Verdana", Font.PLAIN, 13));
 		bestaetigen_btn.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent a) {
 				//Name
 				String name = "";
@@ -457,20 +437,35 @@ public class ProduktHinzufuegenPanel extends JPanel {
 				}
 				//Gewicht
 				Float gewicht = 0.0f;
-				if (gewicht_box.getSelectedItem() == "kg" || gewicht_box.getSelectedItem() == "l") {
-					gewicht = gewicht * 1000;
-				}
 				if (gewicht_txt.getText().length() == 0) {
 					JOptionPane.showMessageDialog(null, "Kein Gewicht eingegeben.", "Fehler bei Bestätigung", JOptionPane.ERROR_MESSAGE);
 				} else {
-					gewicht = Float.parseFloat(gewicht_txt.getText());
+					String gewichtsString = gewicht_txt.getText();
+					if (gewichtsString.indexOf(',') != -1) {
+						gewichtsString = gewichtsString.replace(',', '.');
+						if (gewicht_box.getSelectedItem() == "kg" || gewicht_box.getSelectedItem() == "l") {
+							gewicht = Float.parseFloat(gewichtsString);
+							gewicht = gewicht * 1000;
+						} else {
+							gewicht = Float.parseFloat(gewichtsString);
+						}
+					} else {
+						gewicht = Float.parseFloat(gewichtsString);
+					}
 				}
 				//Preis
 				Float preis = 0.0f;
 				if (preis_txt.getText().length() == 0) {
 					JOptionPane.showMessageDialog(null, "Kein Preis eingegeben.", "Fehler bei Bestätigung", JOptionPane.ERROR_MESSAGE);
 				} else {
-					preis = Float.parseFloat(preis_txt.getText());
+					String preisString = preis_txt.getText();
+					if (preisString.indexOf(',') != -1) {
+						preisString = preisString.replace(',', '.');
+						preis = Float.parseFloat(preisString);
+					}
+					else {
+						preis = Float.parseFloat(preisString);
+					}
 				}
 				//Anzahl
 				Integer anzahl = 0;
@@ -506,7 +501,6 @@ public class ProduktHinzufuegenPanel extends JPanel {
 				}
 			}
 		});
-		
 		GridBagConstraints gbc_bestaetigen_btn = new GridBagConstraints();
 		gbc_bestaetigen_btn.fill = GridBagConstraints.BOTH;
 		gbc_bestaetigen_btn.gridwidth = 13;
@@ -515,16 +509,11 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_bestaetigen_btn.gridy = 7;
 		add(bestaetigen_btn, gbc_bestaetigen_btn);
 		
-		JButton abbrechen_btn = new JButton("Abbrechen");
-		abbrechen_btn.setFont(new Font("Verdana", Font.PLAIN, 13));
-		abbrechen_btn.addFocusListener(new FocusListener() {
+		JButton zuruecksetzen_btn = new JButton("Zurücksetzen");
+		zuruecksetzen_btn.setFont(new Font("Verdana", Font.PLAIN, 13));
+		zuruecksetzen_btn.addFocusListener(new FocusListener() {
+			@Override
 			public void focusGained(FocusEvent e) {
-				/*if (preis_txt.isFocusOwner()) {
-					abbrechen_btn.requestFocus();
-				}*/
-				//preis_txt.setFocusable(false);
-				//abbrechen_btn.requestFocus();
-				//preis_txt.removeFocusListener(null);
 				name_txt.setText(null);
 				ean_txt.setText(null);
 				gewicht_txt.setText(null);
@@ -536,23 +525,17 @@ public class ProduktHinzufuegenPanel extends JPanel {
 				if(kategorie_box.getItemCount() != 0){
 					kategorie_box.setSelectedIndex(0);  
 				}
-				//ProduktHinzufuegenPanel.setVisible(false);
-				/*JComponent comp = (JComponent) e.getSource();
-				Window win = SwingUtilities.getWindowAncestor(comp);
-				win.setVisible(false);*/
 			}
+			@Override
 			public void focusLost(FocusEvent e) {
 				
 			}
 		});
-		GridBagConstraints gbc_abbrechen_btn = new GridBagConstraints();
-		gbc_abbrechen_btn.fill = GridBagConstraints.BOTH;
-		gbc_abbrechen_btn.gridwidth = 2;
-		gbc_abbrechen_btn.gridx = 13;
-		gbc_abbrechen_btn.gridy = 7;
-		add(abbrechen_btn, gbc_abbrechen_btn);
-		
+		GridBagConstraints gbc_zuruecksetzen_btn = new GridBagConstraints();
+		gbc_zuruecksetzen_btn.fill = GridBagConstraints.BOTH;
+		gbc_zuruecksetzen_btn.gridwidth = 2;
+		gbc_zuruecksetzen_btn.gridx = 13;
+		gbc_zuruecksetzen_btn.gridy = 7;
+		add(zuruecksetzen_btn, gbc_zuruecksetzen_btn);	
 	}
-	
-
 }
