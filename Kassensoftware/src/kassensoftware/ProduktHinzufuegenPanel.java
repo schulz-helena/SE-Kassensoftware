@@ -22,6 +22,8 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.awt.event.ActionEvent;
@@ -46,35 +48,38 @@ public class ProduktHinzufuegenPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public ProduktHinzufuegenPanel() {
-		this.setSize(637, 447);
+		this.setSize(1650, 1080);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{110, 0, 40, 0, -1, 0, 22, 0, 0, 0, 0, 0, 0, 49, 0, 0};
-		gridBagLayout.rowHeights = new int[]{71, 34, 34, 34, 34, 34, 52, 92, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{0, 110, 0, 40, 0, -1, 0, 22, 0, 0, 0, 0, 0, 0, 49, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{133, 65, 65, 65, 65, 65, 80, 173, 92, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JLabel ueberschrift_lbl = new JLabel("Produkt hinzufügen");
 		ueberschrift_lbl.setFont(new Font("Verdana", Font.BOLD, 20));
+		ueberschrift_lbl.setForeground(new Color(64, 116, 161));
 		GridBagConstraints gbc_ueberschrift_lbl = new GridBagConstraints();
 		gbc_ueberschrift_lbl.gridwidth = 15;
-		gbc_ueberschrift_lbl.insets = new Insets(0, 0, 5, 0);
-		gbc_ueberschrift_lbl.gridx = 0;
+		gbc_ueberschrift_lbl.insets = new Insets(0, 0, 5, 5);
+		gbc_ueberschrift_lbl.gridx = 1;
 		gbc_ueberschrift_lbl.gridy = 0;
 		add(ueberschrift_lbl, gbc_ueberschrift_lbl);
 
 		
 		JLabel name_lbl = new JLabel("Produktname:");
-		name_lbl.setFont(new Font("Verdana", Font.PLAIN, 13));
+		name_lbl.setFont(new Font("Verdana", Font.PLAIN, 16));
+		name_lbl.setForeground(new Color(64, 116, 161));
 		GridBagConstraints gbc_name_lbl = new GridBagConstraints();
 		gbc_name_lbl.anchor = GridBagConstraints.EAST;
 		gbc_name_lbl.insets = new Insets(0, 0, 5, 5);
-		gbc_name_lbl.gridx = 0;
+		gbc_name_lbl.gridx = 1;
 		gbc_name_lbl.gridy = 1;
 		add(name_lbl, gbc_name_lbl);
 		
 		name_txt = new JTextField();
-		name_txt.setFont(new Font("Verdana", Font.PLAIN, 13));
+		name_txt.setFont(new Font("Verdana", Font.PLAIN, 16));
+		name_txt.setForeground(new Color(64, 116, 161));
 		name_txt.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -103,32 +108,36 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_name_txt.fill = GridBagConstraints.HORIZONTAL;
 		gbc_name_txt.gridwidth = 12;
 		gbc_name_txt.insets = new Insets(0, 0, 5, 5);
-		gbc_name_txt.gridx = 1;
+		gbc_name_txt.gridx = 2;
 		gbc_name_txt.gridy = 1;
 		add(name_txt, gbc_name_txt);
 		name_txt.setColumns(10);
 		
 		JLabel ean_lbl = new JLabel("EAN:");
-		ean_lbl.setFont(new Font("Verdana", Font.PLAIN, 13));
+		ean_lbl.setFont(new Font("Verdana", Font.PLAIN, 16));
+		ean_lbl.setForeground(new Color(64, 116, 161));
 		GridBagConstraints gbc_ean_lbl = new GridBagConstraints();
 		gbc_ean_lbl.anchor = GridBagConstraints.EAST;
 		gbc_ean_lbl.insets = new Insets(0, 0, 5, 5);
-		gbc_ean_lbl.gridx = 0;
+		gbc_ean_lbl.gridx = 1;
 		gbc_ean_lbl.gridy = 2;
 		add(ean_lbl, gbc_ean_lbl);
 		
 		JComboBox ean_box = new JComboBox();
-		ean_box.setFont(new Font("Verdana", Font.PLAIN, 13));
+		ean_box.setFont(new Font("Verdana", Font.PLAIN, 16));
+		ean_box.setForeground(new Color(64, 116, 161));
 		ean_box.setModel(new DefaultComboBoxModel(new String[] {"EAN-8", "EAN-13"}));
 		GridBagConstraints gbc_ean_box = new GridBagConstraints();
+		gbc_ean_box.gridwidth = 2;
 		gbc_ean_box.insets = new Insets(0, 0, 5, 5);
 		gbc_ean_box.fill = GridBagConstraints.HORIZONTAL;
-		gbc_ean_box.gridx = 13;
+		gbc_ean_box.gridx = 14;
 		gbc_ean_box.gridy = 2;
 		add(ean_box, gbc_ean_box);
 		
 		ean_txt = new JTextField();
-		ean_txt.setFont(new Font("Verdana", Font.PLAIN, 13));
+		ean_txt.setFont(new Font("Verdana", Font.PLAIN, 16));
+		ean_txt.setForeground(new Color(64, 116, 161));
 		ean_txt.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -144,17 +153,6 @@ public class ProduktHinzufuegenPanel extends JPanel {
 			        	break;
 			        }
 			    }
-				ArrayList<Produkt> produkte = JSONDemo.getAllProducts();
-				int size = produkte.size();
-				String produktListe[] = new String[size];
-				for (int i = 0; i < size; i++) { 
-		            produktListe[i] = produkte.get(i).getEan();
-		            if (produktListe[i].equals(ean)) {
-		            	JOptionPane.showMessageDialog(null, "Es ist bereits ein Produkt mit der eingegebenen EAN vorhanden.", "Fehler bei EAN-Eingabe", JOptionPane.ERROR_MESSAGE);
-		            	ean_txt.requestFocus();
-		            	break;
-		            }
-				}
 				if (ean_box.getSelectedItem() == "EAN-8" && ean_txt.getText().length() > 8) {
 					JOptionPane.showMessageDialog(null, "Die eingegebene EAN ist zu lang.", "Fehler bei EAN-Eingabe", JOptionPane.ERROR_MESSAGE);
 					ean_txt.requestFocus();
@@ -170,32 +168,36 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_ean_txt.gridwidth = 12;
 		gbc_ean_txt.insets = new Insets(0, 0, 5, 5);
 		gbc_ean_txt.fill = GridBagConstraints.HORIZONTAL;
-		gbc_ean_txt.gridx = 1;
+		gbc_ean_txt.gridx = 2;
 		gbc_ean_txt.gridy = 2;
 		add(ean_txt, gbc_ean_txt);
 		
 		
 		JLabel gewicht_lbl = new JLabel("Gewicht:");
-		gewicht_lbl.setFont(new Font("Verdana", Font.PLAIN, 13));
+		gewicht_lbl.setFont(new Font("Verdana", Font.PLAIN, 16));
+		gewicht_lbl.setForeground(new Color(64, 116, 161));
 		GridBagConstraints gbc_gewicht_lbl = new GridBagConstraints();
 		gbc_gewicht_lbl.anchor = GridBagConstraints.EAST;
 		gbc_gewicht_lbl.insets = new Insets(0, 0, 5, 5);
-		gbc_gewicht_lbl.gridx = 0;
+		gbc_gewicht_lbl.gridx = 1;
 		gbc_gewicht_lbl.gridy = 3;
 		add(gewicht_lbl, gbc_gewicht_lbl);
 		
 		JComboBox gewicht_box = new JComboBox();
-		gewicht_box.setFont(new Font("Verdana", Font.PLAIN, 13));
+		gewicht_box.setFont(new Font("Verdana", Font.PLAIN, 16));
+		gewicht_box.setForeground(new Color(64, 116, 161));
 		gewicht_box.setModel(new DefaultComboBoxModel(new String[] {"g", "kg", "ml", "l"}));
 		GridBagConstraints gbc_gewicht_box = new GridBagConstraints();
+		gbc_gewicht_box.gridwidth = 2;
 		gbc_gewicht_box.insets = new Insets(0, 0, 5, 5);
 		gbc_gewicht_box.fill = GridBagConstraints.HORIZONTAL;
-		gbc_gewicht_box.gridx = 13;
+		gbc_gewicht_box.gridx = 14;
 		gbc_gewicht_box.gridy = 3;
 		add(gewicht_box, gbc_gewicht_box);
 		
 		gewicht_txt = new JTextField();
-		gewicht_txt.setFont(new Font("Verdana", Font.PLAIN, 13));
+		gewicht_txt.setFont(new Font("Verdana", Font.PLAIN, 16));
+		gewicht_txt.setForeground(new Color(64, 116, 161));
 		gewicht_txt.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -255,22 +257,24 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_gewicht_txt.gridwidth = 12;
 		gbc_gewicht_txt.insets = new Insets(0, 0, 5, 5);
 		gbc_gewicht_txt.fill = GridBagConstraints.HORIZONTAL;
-		gbc_gewicht_txt.gridx = 1;
+		gbc_gewicht_txt.gridx = 2;
 		gbc_gewicht_txt.gridy = 3;
 		add(gewicht_txt, gbc_gewicht_txt);
 		
 		
 		JLabel preis_lbl = new JLabel("Preis:");
-		preis_lbl.setFont(new Font("Verdana", Font.PLAIN, 13));
+		preis_lbl.setFont(new Font("Verdana", Font.PLAIN, 16));
+		preis_lbl.setForeground(new Color(64, 116, 161));
 		GridBagConstraints gbc_preis_lbl = new GridBagConstraints();
 		gbc_preis_lbl.anchor = GridBagConstraints.EAST;
 		gbc_preis_lbl.insets = new Insets(0, 0, 5, 5);
-		gbc_preis_lbl.gridx = 0;
+		gbc_preis_lbl.gridx = 1;
 		gbc_preis_lbl.gridy = 4;
 		add(preis_lbl, gbc_preis_lbl);
 		
 		preis_txt = new JTextField();
-		preis_txt.setFont(new Font("Verdana", Font.PLAIN, 13));
+		preis_txt.setFont(new Font("Verdana", Font.PLAIN, 16));
+		preis_txt.setForeground(new Color(64, 116, 161));
 		preis_txt.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -306,40 +310,57 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_preis_txt.gridwidth = 12;
 		gbc_preis_txt.insets = new Insets(0, 0, 5, 5);
 		gbc_preis_txt.fill = GridBagConstraints.HORIZONTAL;
-		gbc_preis_txt.gridx = 1;
+		gbc_preis_txt.gridx = 2;
 		gbc_preis_txt.gridy = 4;
 		add(preis_txt, gbc_preis_txt);
 		
 		JLabel euro_lbl = new JLabel("€");
-		euro_lbl.setFont(new Font("Verdana", Font.PLAIN, 13));
+		euro_lbl.setFont(new Font("Verdana", Font.PLAIN, 16));
+		euro_lbl.setForeground(new Color(64, 116, 161));
 		GridBagConstraints gbc_euro_lbl = new GridBagConstraints();
 		gbc_euro_lbl.anchor = GridBagConstraints.WEST;
 		gbc_euro_lbl.insets = new Insets(0, 0, 5, 5);
-		gbc_euro_lbl.gridx = 13;
+		gbc_euro_lbl.gridx = 14;
 		gbc_euro_lbl.gridy = 4;
 		add(euro_lbl, gbc_euro_lbl);
 		
-		JLabel anzahl_lbl = new JLabel("Anzahl:");
-		anzahl_lbl.setFont(new Font("Verdana", Font.PLAIN, 13));
+		JLabel anzahl_lbl = new JLabel("Bestand:");
+		anzahl_lbl.setFont(new Font("Verdana", Font.PLAIN, 16));
+		anzahl_lbl.setForeground(new Color(64, 116, 161));
 		GridBagConstraints gbc_anzahl_lbl = new GridBagConstraints();
 		gbc_anzahl_lbl.anchor = GridBagConstraints.EAST;
 		gbc_anzahl_lbl.insets = new Insets(0, 0, 5, 5);
-		gbc_anzahl_lbl.gridx = 0;
+		gbc_anzahl_lbl.gridx = 1;
 		gbc_anzahl_lbl.gridy = 5;
 		add(anzahl_lbl, gbc_anzahl_lbl);
 		
 		JComboBox anzahl_box = new JComboBox();
-		anzahl_box.setFont(new Font("Verdana", Font.PLAIN, 13));
-		anzahl_box.setModel(new DefaultComboBoxModel(new String[] {"Stück", "Gesamtgewicht"}));
+		anzahl_box.setFont(new Font("Verdana", Font.PLAIN, 16));
+		anzahl_box.setForeground(new Color(64, 116, 161));
+		anzahl_box.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (anzahl_box.getSelectedItem() == "Sonderzustand") {
+					anzahl_txt.setText("-");
+					anzahl_txt.setEditable(false);
+				} else {
+					anzahl_txt.setText("");
+					anzahl_txt.setEditable(true);
+				}
+			}
+		});
+		anzahl_box.setModel(new DefaultComboBoxModel(new String[] {"Stück", "Sonderzustand"}));
 		GridBagConstraints gbc_anzahl_box = new GridBagConstraints();
+		gbc_anzahl_box.gridwidth = 2;
 		gbc_anzahl_box.insets = new Insets(0, 0, 5, 5);
 		gbc_anzahl_box.fill = GridBagConstraints.HORIZONTAL;
-		gbc_anzahl_box.gridx = 13;
+		gbc_anzahl_box.gridx = 14;
 		gbc_anzahl_box.gridy = 5;
 		add(anzahl_box, gbc_anzahl_box);
 		
 		anzahl_txt = new JTextField();
-		anzahl_txt.setFont(new Font("Verdana", Font.PLAIN, 13));
+		anzahl_txt.setFont(new Font("Verdana", Font.PLAIN, 16));
+		anzahl_txt.setForeground(new Color(64, 116, 161));
 		anzahl_txt.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -348,20 +369,22 @@ public class ProduktHinzufuegenPanel extends JPanel {
 			@Override
 			public void focusLost(FocusEvent e) {
 				Long anzahl = (long)0;
-				if (anzahl_txt.getText().length() > 0) {
-					try {
-						anzahl = Long.parseLong(anzahl_txt.getText());
-					} catch(Exception ex) {
-						JOptionPane.showMessageDialog(null, "Keine Nummer eingegeben.", "Fehler bei Anzahl-Eingabe", JOptionPane.ERROR_MESSAGE);
-						anzahl_txt.requestFocus();
-					}
-					if (anzahl_box.getSelectedItem() == "Stück" && anzahl > 1000) {
-						JOptionPane.showMessageDialog(null, "Die eingegebene Anzahl ist zu groß.", "Fehler bei Anzahl-Eingabe", JOptionPane.ERROR_MESSAGE);
-						anzahl_txt.requestFocus();
-					}
-					else if (anzahl_box.getSelectedItem() == "Gesamtgewicht" && anzahl > 100000) {
-						JOptionPane.showMessageDialog(null, "Das eingegebene Gesamtgewicht ist zu groß.", "Fehler bei Anzahl-Eingabe", JOptionPane.ERROR_MESSAGE);
-						anzahl_txt.requestFocus();
+				if (anzahl_txt.getText().equals("-") == false) {
+					if (anzahl_txt.getText().length() > 0) {
+						try {
+							anzahl = Long.parseLong(anzahl_txt.getText());
+						} catch(Exception ex) {
+							JOptionPane.showMessageDialog(null, "Keine Nummer eingegeben.", "Fehler bei Bestand-Eingabe", JOptionPane.ERROR_MESSAGE);
+							anzahl_txt.requestFocus();
+						}
+						if (anzahl_box.getSelectedItem() == "Stück" && anzahl > 1000) {
+							JOptionPane.showMessageDialog(null, "Die eingegebene Anzahl ist zu groß.", "Fehler bei Bestand-Eingabe", JOptionPane.ERROR_MESSAGE);
+							anzahl_txt.requestFocus();
+						}
+						else if (anzahl_box.getSelectedItem() == "Gesamtgewicht" && anzahl > 100000) {
+							JOptionPane.showMessageDialog(null, "Das eingegebene Gesamtgewicht ist zu groß.", "Fehler bei Bestand-Eingabe", JOptionPane.ERROR_MESSAGE);
+							anzahl_txt.requestFocus();
+						}
 					}
 				}
 			}
@@ -371,16 +394,17 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_anzahl_txt.gridwidth = 12;
 		gbc_anzahl_txt.insets = new Insets(0, 0, 5, 5);
 		gbc_anzahl_txt.fill = GridBagConstraints.HORIZONTAL;
-		gbc_anzahl_txt.gridx = 1;
+		gbc_anzahl_txt.gridx = 2;
 		gbc_anzahl_txt.gridy = 5;
 		add(anzahl_txt, gbc_anzahl_txt);
 		
 		JLabel kategorie_lbl = new JLabel("Kategorie:");
-		kategorie_lbl.setFont(new Font("Verdana", Font.PLAIN, 13));
+		kategorie_lbl.setFont(new Font("Verdana", Font.PLAIN, 16));
+		kategorie_lbl.setForeground(new Color(64, 116, 161));
 		GridBagConstraints gbc_kategorie_lbl = new GridBagConstraints();
 		gbc_kategorie_lbl.anchor = GridBagConstraints.EAST;
 		gbc_kategorie_lbl.insets = new Insets(0, 0, 5, 5);
-		gbc_kategorie_lbl.gridx = 0;
+		gbc_kategorie_lbl.gridx = 1;
 		gbc_kategorie_lbl.gridy = 6;
 		add(kategorie_lbl, gbc_kategorie_lbl);
 		
@@ -392,17 +416,19 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		}
 		Arrays.sort(kategorieListe);
 		JComboBox kategorie_box = new JComboBox(kategorieListe);
-		kategorie_box.setFont(new Font("Verdana", Font.PLAIN, 13));
+		kategorie_box.setFont(new Font("Verdana", Font.PLAIN, 16));
+		kategorie_box.setForeground(new Color(64, 116, 161));
 		GridBagConstraints gbc_kategorie_box = new GridBagConstraints();
 		gbc_kategorie_box.gridwidth = 12;
 		gbc_kategorie_box.insets = new Insets(0, 0, 5, 5);
-		gbc_kategorie_box.fill = GridBagConstraints.HORIZONTAL;
-		gbc_kategorie_box.gridx = 1;
+		gbc_kategorie_box.fill = GridBagConstraints.BOTH;
+		gbc_kategorie_box.gridx = 2;
 		gbc_kategorie_box.gridy = 6;
 		add(kategorie_box, gbc_kategorie_box);
 		
 		JButton bestaetigen_btn = new JButton("Hinzufügen bestätigen");
-		bestaetigen_btn.setFont(new Font("Verdana", Font.PLAIN, 13));
+		bestaetigen_btn.setFont(new Font("Verdana", Font.PLAIN, 16));
+		bestaetigen_btn.setForeground(new Color(64, 116, 161));
 		bestaetigen_btn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent a) {
@@ -418,7 +444,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 				if (ean_txt.getText().length() == 0) {
 					JOptionPane.showMessageDialog(null, "Keine EAN eingegeben.", "Fehler bei Bestätigung", JOptionPane.ERROR_MESSAGE);
 				}
-				else if (ean_box.getSelectedItem() == "EAN-8" && ean_txt.getText().length() > 0 && ean_txt.getText().length() < 8) {
+				if (ean_box.getSelectedItem() == "EAN-8" && ean_txt.getText().length() > 0 && ean_txt.getText().length() < 8) {
 					int leng = ean_txt.getText().length();
 					ean = ean_txt.getText();
 					for( ; leng < 8; leng++) {
@@ -434,6 +460,17 @@ public class ProduktHinzufuegenPanel extends JPanel {
 				}
 				else {
 					ean = ean_txt.getText();
+				}
+				ArrayList<Produkt> produkte = JSONDemo.getAllProducts();
+				int size = produkte.size();
+				String produktListe[] = new String[size];
+				for (int i = 0; i < size; i++) { 
+		            produktListe[i] = produkte.get(i).getEan();
+		            if (produktListe[i].equals(ean)) {
+		            	JOptionPane.showMessageDialog(null, "Es ist bereits ein Produkt mit der eingegebenen EAN vorhanden.", "Fehler bei Bestätigung", JOptionPane.ERROR_MESSAGE);
+		            	ean = "";
+		            	break;
+		            }
 				}
 				//Gewicht
 				Float gewicht = 0.0f;
@@ -468,9 +505,17 @@ public class ProduktHinzufuegenPanel extends JPanel {
 					}
 				}
 				//Anzahl
-				Integer anzahl = 0;
-				if (anzahl_txt.getText().length() > 0) {
-					anzahl = Integer.parseInt(anzahl_txt.getText());
+				//Integer anzahl = 0;
+				String anzahl = "";
+				if (anzahl_box.getSelectedItem() == "Sonderzustand") {
+					anzahl = "n";
+				} else {
+					if (anzahl_txt.getText().length() > 0) {
+						anzahl = anzahl_txt.getText();
+						//anzahl = Integer.parseInt(anzahl_txt.getText());
+					} else {
+						anzahl = "0";
+					}
 				}
 				//Kategorie
 				String kategoriename = "";
@@ -503,14 +548,15 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		});
 		GridBagConstraints gbc_bestaetigen_btn = new GridBagConstraints();
 		gbc_bestaetigen_btn.fill = GridBagConstraints.BOTH;
-		gbc_bestaetigen_btn.gridwidth = 13;
+		gbc_bestaetigen_btn.gridwidth = 12;
 		gbc_bestaetigen_btn.insets = new Insets(0, 0, 0, 5);
-		gbc_bestaetigen_btn.gridx = 0;
-		gbc_bestaetigen_btn.gridy = 7;
+		gbc_bestaetigen_btn.gridx = 2;
+		gbc_bestaetigen_btn.gridy = 8;
 		add(bestaetigen_btn, gbc_bestaetigen_btn);
 		
 		JButton zuruecksetzen_btn = new JButton("Zurücksetzen");
-		zuruecksetzen_btn.setFont(new Font("Verdana", Font.PLAIN, 13));
+		zuruecksetzen_btn.setFont(new Font("Verdana", Font.PLAIN, 16));
+		zuruecksetzen_btn.setForeground(new Color(64, 116, 161));
 		zuruecksetzen_btn.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -532,10 +578,11 @@ public class ProduktHinzufuegenPanel extends JPanel {
 			}
 		});
 		GridBagConstraints gbc_zuruecksetzen_btn = new GridBagConstraints();
+		gbc_zuruecksetzen_btn.insets = new Insets(0, 0, 0, 5);
 		gbc_zuruecksetzen_btn.fill = GridBagConstraints.BOTH;
 		gbc_zuruecksetzen_btn.gridwidth = 2;
-		gbc_zuruecksetzen_btn.gridx = 13;
-		gbc_zuruecksetzen_btn.gridy = 7;
+		gbc_zuruecksetzen_btn.gridx = 14;
+		gbc_zuruecksetzen_btn.gridy = 8;
 		add(zuruecksetzen_btn, gbc_zuruecksetzen_btn);	
 	}
 }
