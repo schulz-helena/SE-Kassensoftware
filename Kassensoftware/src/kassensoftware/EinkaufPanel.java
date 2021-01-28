@@ -1,3 +1,5 @@
+package kassensoftware;
+
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
@@ -13,7 +15,6 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -85,8 +86,13 @@ public class EinkaufPanel extends JPanel {
 		JButton btnNewButton = new JButton("Produkt einkaufen");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Produkt p = findProdukt(textField_1.getText(), comboBox.getSelectedItem());
-				JOptionPane.showMessageDialog(null, p.getName(), "Bestätigung", JOptionPane.INFORMATION_MESSAGE);
+				Produkt p = findProdukt(textField.getText(), comboBox.getSelectedItem());
+				if (p != null) {
+					JOptionPane.showMessageDialog(null, p.getName(), "Bestï¿½tigung", JOptionPane.INFORMATION_MESSAGE);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Produkt nicht gefunden.", "Fehler", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 		btnNewButton.setFont(new Font("Verdana", Font.PLAIN, 13));
@@ -99,11 +105,10 @@ public class EinkaufPanel extends JPanel {
 	}
 
 	public Produkt findProdukt(String s, Object combo) {
-		if (combo.toString().compareTo("Name") == 0) {
+		
+		if (combo.toString().compareTo("EAN") == 0) {
 			return JSONDemo.getProdukt(s);
 		}
 		return JSONDemo.getProdukt(s);
-
 	}
-
 }
