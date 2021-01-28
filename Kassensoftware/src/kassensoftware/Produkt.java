@@ -2,12 +2,11 @@ package kassensoftware;
 
 public class Produkt {
 	
-	private String name, ean;
+	private String name, ean, anzahl;
 	private Float preis, gewicht, grundpreis;
-	private Integer anzahl;
 	private Kategorie kategorie;
 	
-	Produkt(String name, String ean, Float preis, Float gewicht, Integer anzahl, Kategorie kategorie) {
+	Produkt(String name, String ean, Float preis, Float gewicht, String anzahl, Kategorie kategorie) {
 		this.name = name;
 		this.ean = ean;
 		this.preis = preis;
@@ -34,7 +33,7 @@ public class Produkt {
 		this.gewicht = gewicht;
 	}
 	
-	public void setAnzahl(Integer anzahl) {
+	public void setAnzahl(String anzahl) {
 		this.anzahl = anzahl;
 	}
 	
@@ -62,7 +61,7 @@ public class Produkt {
 		return this.grundpreis;
 	}
 	
-	public Integer getAnzahl() {
+	public String getAnzahl() {
 		return this.anzahl;
 	}
 	
