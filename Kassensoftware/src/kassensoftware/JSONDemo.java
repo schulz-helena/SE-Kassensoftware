@@ -37,7 +37,6 @@ public final class JSONDemo {
 	/**
 	 * Speichert ein nicht leeres Produkt in <code>dataFile</code> ab.
 	 * Wenn bereits ein Produkt mit der gleichen EAN existiert, wird es überschrieben.
-	 * Falls die Datenbank noch nicht existiert, wird sie erzeugt.
 	 * 
 	 * @param 	produkt das Produkt, das gespeichert werden soll
 	 * @return 	<code>true</code>, falls das Produkt erfolgreich gespeichert wurde;
@@ -57,7 +56,7 @@ public final class JSONDemo {
 	    map.put("Preis", produkt.getPreis().toString());
 	    map.put("Gewicht", produkt.getGewicht().toString());
 	    map.put("Grundpreis", produkt.getGrundpreis().toString());
-	    map.put("Anzahl", produkt.getAnzahl().toString());
+	    map.put("Anzahl", produkt.getAnzahl());
 	    map.put("Kategorie", produkt.getKategorie().getKategorieName());
 	    
 	    // JSONObject erzeugen
@@ -98,8 +97,7 @@ public final class JSONDemo {
 	
 	
 	/**
-	 * Speichert eine nicht leeres Kategorie in <code>dataFile</code> ab.
-	 * Falls die Datei noch nicht existiert, wird sie erzeugt.
+	 * Speichert eine nicht leere Kategorie in <code>dataFile</code> ab.
 	 * 
 	 * @param 	kategorie	Kategorie, die gespeichert werden soll
 	 * @return 	<code>true</code>, falls die Kategorie erfolgreich gespeichert wurde;
@@ -158,7 +156,7 @@ public final class JSONDemo {
 	    			String name = item.get("Name").toString();
 	    			Float preis = Float.parseFloat(item.get("Preis").toString());
 	    			Float gewicht = Float.parseFloat(item.get("Gewicht").toString());
-	    			Integer anzahl = Integer.parseInt(item.get("Anzahl").toString());
+	    			String anzahl = item.get("Anzahl").toString();
 	    			Kategorie kategorie = new Kategorie(item.get("Kategorie").toString());
 	    			return new Produkt(name, ean, preis, gewicht, anzahl, kategorie);
 	    		}
@@ -169,6 +167,28 @@ public final class JSONDemo {
 	    }
 		
 		return null;
+	}
+	
+	/**
+	 * Sucht in <code>dataFile</code> nach allen Produkten mit dem Namen <code>name</code>
+	 * oder 
+	 * 
+	 * @param	name	Name des gesuchten Produktes
+	 * @return	<code>ArrayList</code> mit den Produkten, deren Name mit <code>name</code> übereinstimmt
+	 * 			oder ihn in ihrem Namen enthalten;
+	 * 			die <code>ArrayList</code> ist leer, wenn keine Produkte mit passenden Namen gefunden wurden
+	 */
+	public static ArrayList<Produkt> produktSuchen(String suchString) {
+		ArrayList<Produkt> produkte = getAllProducts();
+		ArrayList<Produkt> liste = new ArrayList<>();
+		
+		for (Produkt element : produkte) {
+			if (element.getName().contains(suchString) || element.getEan().contains(suchString)) {
+				liste.add(element);
+			}
+		}
+		
+		return liste;
 	}
 	
 	
@@ -193,7 +213,7 @@ public final class JSONDemo {
 	    		String name = item.get("Name").toString();
 	    		Float preis = Float.parseFloat(item.get("Preis").toString());
 	    		Float gewicht = Float.parseFloat(item.get("Gewicht").toString());
-	    		Integer anzahl = Integer.parseInt(item.get("Anzahl").toString());
+	    		String anzahl = item.get("Anzahl").toString();
 	    		Kategorie kategorie = new Kategorie(item.get("Kategorie").toString());
 	    		
 	    		produktListe.add(new Produkt(name, ean, preis, gewicht, anzahl, kategorie));
@@ -257,13 +277,12 @@ public final class JSONDemo {
 	/**
 	 * Entfernt ein Produkt aus der Datenbank, falls vorhanden.
 	 * 
-	 * @param produkt	Produkt, das aus der Datenbank entfernt werden soll
+	 * @param ean	EAN des Produktes, das aus der Datenbank entfernt werden soll
 	 * @return			<code>true</code>, falls das Produkt erfolgreich entfernt wurde;
 	 * 					<code>false</code>, falls das Produkt nicht entfernt wurde
 	 */
-	public static boolean produktEntfernen(Produkt produkt) {
+	public static boolean produktEntfernen(String ean) {
 		JSONArray list = readData("products");
-    	String ean = produkt.getEan();
     	
     	int index = 0;
     	boolean modified = false;
@@ -292,13 +311,12 @@ public final class JSONDemo {
 	/**
 	 * Entfernt eine Kategorie aus der Datenbank, falls vorhanden.
 	 * 
-	 * @param kategorie	Kategorie, die entfernt werden soll
+	 * @param name	Name der Kategorie, die entfernt werden soll
 	 * @return			<code>true</code>, falls die Kategorie erfolgreich entfernt wurde;
 	 * 					<code>false</code>, falls die Kategorie nicht entfernt wurde
 	 */
-	public static boolean kategorieEntfernen(Kategorie kategorie) {
+	public static boolean kategorieEntfernen(String name) {
 		JSONArray list = readData("categories");
-		String name = kategorie.getKategorieName();
 		
 		boolean modified = false;
     	int index = 0;

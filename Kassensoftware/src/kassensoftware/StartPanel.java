@@ -3,10 +3,12 @@ package kassensoftware;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import java.awt.GridLayout;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import java.awt.BorderLayout;
 
 public class StartPanel extends JPanel {
 
@@ -15,20 +17,27 @@ public class StartPanel extends JPanel {
 	 */
 	public StartPanel() {
 		this.setSize(450, 400);
-		setLayout(new GridLayout(0, 1, 0, 0));
+		setLayout(new BorderLayout(0, 0));
 		
-		JLabel titelLabel = new JLabel("Kassensoftware");
-		titelLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		titelLabel.setFont(new Font("Lucida Grande", Font.BOLD, 30));
-		titelLabel.setForeground(new Color(64, 116, 161));
-		add(titelLabel);
+		JLabel titleLabel = new JLabel("Kassensoftware");
+		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		titleLabel.setFont(new Font("Verdana", Font.BOLD, 30));
+		titleLabel.setForeground(new Color(0, 69, 129));
+		titleLabel.setBorder(new EmptyBorder(50, 0, 0, 0));
+		add(titleLabel, BorderLayout.NORTH);
 		
-		JLabel label2 = new JLabel("Wilkommen im Kassensystem!");
-		label2.setVerticalAlignment(SwingConstants.TOP);
+		JLabel label2 = new JLabel("Kassensystem ist bereit");
 		label2.setHorizontalAlignment(SwingConstants.CENTER);
-		label2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		label2.setForeground(new Color(64, 116, 161));
-		add(label2);
+		label2.setFont(new Font("Verdana", Font.PLAIN, 20));
+		label2.setForeground(new Color(0, 69, 129));
+		add(label2, BorderLayout.CENTER);
+		
+		JLabel lblNewLabel = new JLabel("Version: 1.0.0");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel.setForeground(Color.DARK_GRAY);
+		lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 16));
+		lblNewLabel.setBorder(new EmptyBorder(0, 0, 10, 10));
+		add(lblNewLabel, BorderLayout.SOUTH);
 
 	}
 
