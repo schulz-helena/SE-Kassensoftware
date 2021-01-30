@@ -449,7 +449,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 				else {
 					ean = ean_txt.getText();
 				}
-				ArrayList<Produkt> produkte = JSONDemo.getAllProducts();
+				ArrayList<Produkt> produkte = JSONDemo.getAlleProdukte();
 				int size = produkte.size();
 				String produktListe[] = new String[size];
 				for (int i = 0; i < size; i++) { 
@@ -578,7 +578,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 	 * Aktualisiert das ProduktHinzufuegenPanel.
 	 */
 	public void refresh() {
-		ArrayList<Kategorie> kategorien = JSONDemo.getAllCategories();
+		ArrayList<Kategorie> kategorien = JSONDemo.getAlleKategorien();
 		int size = kategorien.size();
 		String kategorieListe[] = new String[size];
 		

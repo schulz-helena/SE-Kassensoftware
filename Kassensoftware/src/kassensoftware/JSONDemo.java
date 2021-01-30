@@ -27,11 +27,11 @@ public final class JSONDemo {
 	/**
 	 * Die Datenbank wird in der Datei <code>dataFile</code> mit dem Namen data.json im Verzeichnis daten gespeichert.
 	 */
-	private static final String dataFilename = "data.json";
-	private static final String dataDirectory = "daten";
-	private static final String dataPath = dataDirectory + "/" + dataFilename;
-	private static String dataContent = "{\n\t\"products\": [],\n\t\"categories\": []\n}";
-	private static final File dataFile = new File(dataPath);
+	private static final String dateiname = "data.json";
+	private static final String verzeichnisname = "daten";
+	private static final String dateiPfad = verzeichnisname + "/" + dateiname;
+	private static String dateiInhalt = "{\n\t\"products\": [],\n\t\"categories\": []\n}";
+	private static final File datei = new File(dateiPfad);
 	
 	
 	/**
@@ -177,7 +177,7 @@ public final class JSONDemo {
 	 * 			sonst ist die <code>ArrayList</code> leer
 	 */
 	public static ArrayList<Produkt> produktSuchen(String suchString) {
-		ArrayList<Produkt> produkte = getAllProducts();
+		ArrayList<Produkt> produkte = getAlleProdukte();
 		ArrayList<Produkt> list = new ArrayList<>();
 		
 		for (Produkt element : produkte) {
@@ -204,7 +204,7 @@ public final class JSONDemo {
 	 * 
 	 * @return	<code>ArrayList</code> mit allen Produkten
 	 */
-	public static ArrayList<Produkt> getAllProducts() {
+	public static ArrayList<Produkt> getAlleProdukte() {
 		ArrayList<Produkt> produktListe = new ArrayList<>();
 		JSONArray list = readData("products");
 		
@@ -265,7 +265,7 @@ public final class JSONDemo {
 	 * 
 	 * @return	<code>ArrayList<code> mit den Kategorien
 	 */
-	public static ArrayList<Kategorie> getAllCategories() {
+	public static ArrayList<Kategorie> getAlleKategorien() {
 		ArrayList<Kategorie> kategorieListe = new ArrayList<>();
 		JSONArray list = readData("categories");
 		
@@ -354,8 +354,8 @@ public final class JSONDemo {
 	 * Falls das Verzeichnis nicht existiert, wird es ebenfalls erzeugt.
 	 */
 	
-	public static void createDataFile() {
-		File directory = new File(dataDirectory);
+	public static void erzeugeDatei() {
+		File directory = new File(verzeichnisname);
 		
 		// Falls das Verzeichnis nicht existiert, versuche es zu erzeugen
 		try {
@@ -364,17 +364,17 @@ public final class JSONDemo {
 		    }
 		}
 		catch (Exception e) {
-			System.out.println("Das Verzeichnis " + dataDirectory + " konnte nicht erzeugt werden.");
+			System.out.println("Das Verzeichnis " + verzeichnisname + " konnte nicht erzeugt werden.");
 		}
 	    
 		// Versuche die Datei zu erstellen
 	    try {
-	    	FileWriter writer = new FileWriter(dataPath);
-	    	writer.write(dataContent);
+	    	FileWriter writer = new FileWriter(dateiPfad);
+	    	writer.write(dateiInhalt);
 		    writer.close();
 	    }
 	    catch (IOException e) {
-	    	System.out.println("Datei " + dataFilename + " konnte nicht erzeugt werden.");
+	    	System.out.println("Datei " + dateiname + " konnte nicht erzeugt werden.");
 	    }
 	}
 	
@@ -388,13 +388,13 @@ public final class JSONDemo {
 	 * 				<code>null</code>, falls kein Eintrag vorhanden war
 	 */
 	private static JSONArray readData(String key) {
-		if (!dataFile.exists()) {
-			createDataFile();
+		if (!datei.exists()) {
+			erzeugeDatei();
 		}
 		
 		try {
 			JSONParser parser = new JSONParser();
-	    	JSONObject obj = (JSONObject) parser.parse(new FileReader(dataPath));
+	    	JSONObject obj = (JSONObject) parser.parse(new FileReader(dateiPfad));
 	    	return (JSONArray) obj.get(key);
 		}
 		catch (ParseException e) {
@@ -418,16 +418,16 @@ public final class JSONDemo {
 	 * 				<code>false</code>, falls die Daten nicht geschrieben werden konnten
 	 */
 	private static boolean writeData(String key, JSONArray list) {
-		if (!dataFile.exists()) {
-			createDataFile();
+		if (!datei.exists()) {
+			erzeugeDatei();
 		}
 		
 		try {
 			JSONParser parser = new JSONParser();
-	    	JSONObject obj = (JSONObject) parser.parse(new FileReader(dataPath));
+	    	JSONObject obj = (JSONObject) parser.parse(new FileReader(dateiPfad));
 	    	
 	    	obj.put(key, list);
-		    BufferedWriter writer = new BufferedWriter(new FileWriter(dataPath));
+		    BufferedWriter writer = new BufferedWriter(new FileWriter(dateiPfad));
 		    obj.writeJSONString(writer);
 		    writer.close();
 		    

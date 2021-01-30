@@ -1,3 +1,5 @@
+package kassensoftware;
+
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -63,7 +65,7 @@ public class EinkaufPanel extends JPanel {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				einkaufsliste.produktStornieren(einkaufsliste.findeProdukt(textField.getText()).getName());
-				JOptionPane.showMessageDialog(null, "Das Produkt wurde storniert.", "Bestätigung",
+				JOptionPane.showMessageDialog(null, "Das Produkt wurde storniert.", "Bestï¿½tigung",
 						JOptionPane.INFORMATION_MESSAGE);
 
 				// Hier weiter stornieren geht noch nicht.
@@ -197,7 +199,7 @@ public class EinkaufPanel extends JPanel {
 						+ String.format("%-20s %-8s %-10s\n", "----------", "-------", "--------");
 				textArea.setText(rechnungHead + "Aktuell werden keine Produkte gekauft.");
 
-				JOptionPane.showMessageDialog(null, "Der Einkauf wurde storniert.", "Bestätigung",
+				JOptionPane.showMessageDialog(null, "Der Einkauf wurde storniert.", "Bestï¿½tigung",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 		});

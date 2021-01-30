@@ -1,3 +1,5 @@
+package kassensoftware;
+
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -70,7 +72,7 @@ public class KategoriePanel extends JPanel {
 				if (name.length() > 2 && name.length() < 32 && b == true) {
 					k1 = new Kategorie(name);
 					JSONDemo.kategorieSpeichern(k1);
-					JOptionPane.showMessageDialog(null, "Kategorie erfolgreich hinzugefügt.");
+					JOptionPane.showMessageDialog(null, "Kategorie erfolgreich hinzugefï¿½gt.");
 					textField.setText(null);
 				} else if (name.length() <= 2) {
 					JOptionPane.showMessageDialog(null, "Die eingegebene Kategorie ist zu kurz.",
@@ -106,7 +108,7 @@ public class KategoriePanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String newLine = "";
 				textArea.setText("");
-				for (Kategorie kat : JSONDemo.getAllCategories()) {
+				for (Kategorie kat : JSONDemo.getAlleKategorien()) {
 					newLine = kat.getKategorieName() + "\n";
 					textArea.setText(textArea.getText() + newLine);
 				}
@@ -138,20 +140,20 @@ public class KategoriePanel extends JPanel {
 				kName = textField_1.getText();
 				if (findKategorieInProdukt(kName) == true) {
 					JOptionPane.showMessageDialog(null, "Die eingegebene Kategorie ist noch einem Produkt zugeordnet.",
-							"Fehler bei Kategorie-Löschung", JOptionPane.ERROR_MESSAGE);
+							"Fehler bei Kategorie-Lï¿½schung", JOptionPane.ERROR_MESSAGE);
 				} else {
-					for (Kategorie kat : JSONDemo.getAllCategories()) {
+					for (Kategorie kat : JSONDemo.getAlleKategorien()) {
 						if (kat.getKategorieName().compareTo(kName) == 0) {
-							JSONDemo.kategorieEntfernen(kat);
+							JSONDemo.kategorieEntfernen(kat.getKategorieName());
 							textField_1.setText(null);
 							JOptionPane.showMessageDialog(null, "Die Kategorie wurde erfolgreich entfernt.");
 						}
 						i++;
 					}
 				}
-				if (i == JSONDemo.getAllCategories().size()) {
+				if (i == JSONDemo.getAlleKategorien().size()) {
 					JOptionPane.showMessageDialog(null, "Die Kategorie konnte nicht gefunden werden.",
-							"Fehler bei Kategorie-Löschung", JOptionPane.ERROR_MESSAGE);
+							"Fehler bei Kategorie-Lï¿½schung", JOptionPane.ERROR_MESSAGE);
 					textField_1.setText(null);
 				}
 
@@ -168,7 +170,7 @@ public class KategoriePanel extends JPanel {
 	}
 
 	public boolean findKategorieInProdukt(String katName) {
-		for (Produkt p : JSONDemo.getAllProducts()) {
+		for (Produkt p : JSONDemo.getAlleProdukte()) {
 			Kategorie k = p.getKategorie();
 			if (k.getKategorieName().compareTo(katName) == 0) {
 				return true;
