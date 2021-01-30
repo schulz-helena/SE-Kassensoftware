@@ -4,6 +4,9 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
@@ -20,6 +23,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 import javax.swing.ListSelectionModel;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 
 /**
@@ -28,9 +33,9 @@ import javax.swing.ListSelectionModel;
  *
  */
 public class ProduktAnzeigenPanel extends JPanel {
-	private JTextField suchfeld;
 	private JTable table;
 	private JLabel emptyLabel;
+	private JTextField suchfeld;
 	JPanel bottomPanel;
 	JScrollPane scrollPane;
 	
@@ -44,34 +49,16 @@ public class ProduktAnzeigenPanel extends JPanel {
 	 * Standardkonstruktor für das <code>ProduktAnzeigenPanel</code>.
 	 */
 	public ProduktAnzeigenPanel() {
+		setBackground(Color.WHITE);
 		setLayout(new BorderLayout(0, 0));
-		setBorder(new EmptyBorder(10, 10, 10, 10));
+		setBorder(new EmptyBorder(20, 20, 20, 20));
 		
 		// Schriftart und Schriftfarbe festlegen
 		Font schriftart = new Font("Verdana", 0, 20);
 		Color schriftfarbe = new Color(0, 69, 129);
-		Color schriftfarbe2 = new Color(255, 140, 78);
-		
-		JPanel suchleiste = new JPanel();
-		add(suchleiste, BorderLayout.NORTH);
-		suchleiste.setLayout(new BorderLayout(10, 0));
-		suchleiste.setBorder(new EmptyBorder(0, 0, 10, 0));
-		
-		suchfeld = new JTextField();
-		suchfeld.setHorizontalAlignment(SwingConstants.CENTER);
-		suchfeld.setFont(schriftart);
-		suchfeld.setForeground(schriftfarbe2);
-		suchfeld.setColumns(10);
-		suchfeld.setPreferredSize(new Dimension(500, 36));
-		suchleiste.add(suchfeld);
-		
-		JButton suchenButton = new JButton("Suchen");
-		suchenButton.setPreferredSize(new Dimension(100, 36));
-		suchenButton.setFont(schriftart);
-		suchenButton.setForeground(schriftfarbe);
-		suchleiste.add(suchenButton, BorderLayout.EAST);
 		
 		scrollPane = new JScrollPane();
+		scrollPane.setBorder(new EmptyBorder(20, 0, 0, 0));
 		add(scrollPane, BorderLayout.CENTER);
 		
 		model = new DefaultTableModel();
@@ -102,6 +89,7 @@ public class ProduktAnzeigenPanel extends JPanel {
 		add(emptyLabel, BorderLayout.CENTER);
 		
 		bottomPanel = new JPanel();
+		bottomPanel.setBackground(Color.WHITE);
 		bottomPanel.setVisible(false);
 		add(bottomPanel, BorderLayout.SOUTH);
 		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 0));
@@ -118,12 +106,44 @@ public class ProduktAnzeigenPanel extends JPanel {
 		entfernenButton.setForeground(schriftfarbe);
 		bottomPanel.add(entfernenButton);
 		
-		suchenButton.addActionListener(new ActionListener()
+		// Suchfeld definieren
+		suchfeld = new JTextField();
+		add(suchfeld, BorderLayout.NORTH);
+		suchfeld.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		suchfeld.setHorizontalAlignment(SwingConstants.CENTER);
+		suchfeld.setFont(schriftart);
+		suchfeld.setForeground(Color.GRAY);
+		suchfeld.setText("Suche nach Name oder EAN");
+		suchfeld.setColumns(10);
+		suchfeld.setPreferredSize(new Dimension(500, 36));
+		
+		
+		// Suchfeld reagiert auf Eingaben und zeigt unmittelbar Suchergebnisse
+		suchfeld.getDocument().addDocumentListener(new DocumentListener()
 		{
-			public void actionPerformed(ActionEvent e)
-			{
+			@Override
+			public void insertUpdate(DocumentEvent e) {
 				produktsucheAnzeigen(suchfeld.getText());
-				suchfeld.setText("");
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				produktsucheAnzeigen(suchfeld.getText());
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				produktsucheAnzeigen(suchfeld.getText());
+			}
+		});
+		
+		suchfeld.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (suchfeld.getText().trim().equals("Suche nach Name oder EAN")) {
+					suchfeld.setText("");
+					suchfeld.setForeground(schriftfarbe);
+				}
 			}
 		});
 		
@@ -184,11 +204,12 @@ public class ProduktAnzeigenPanel extends JPanel {
 	
 	
 	/**
-	 * Setzt das Suchpanel auf den Initialzustand zurück.
+	 * Aktualisiert das ProduktAnzeigenPanel.
 	 */
 	public void refresh() {
-		suchfeld.setText("");
-		disappearTable();
+		//suchfeld.setText("");
+		//disappearTable();
+		produktsucheAnzeigen(suchfeld.getText());
 	}
 	
 	

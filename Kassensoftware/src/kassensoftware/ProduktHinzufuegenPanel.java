@@ -1,23 +1,16 @@
 package kassensoftware;
 
 import javax.swing.JPanel;
-import java.awt.GridLayout;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.Window;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -28,9 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dialog;
-import static javax.swing.JOptionPane.*;
+
 /**
  * Über das ProduktHinzufuegenPanel kann der Nutzer die Produkteigenschaften selbst wählen
  * und mit diesen Eigenschaften ein Produkt erstellen
@@ -43,6 +34,8 @@ public class ProduktHinzufuegenPanel extends JPanel {
 	private JTextField gewicht_txt;
 	private JTextField preis_txt;
 	private JTextField anzahl_txt;
+	
+	private JComboBox<String> kategorie_box;
 
 	/**
 	 * Create the panel.
@@ -408,14 +401,9 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_kategorie_lbl.gridy = 6;
 		add(kategorie_lbl, gbc_kategorie_lbl);
 		
-		ArrayList<Kategorie> kategorien = JSONDemo.getAllCategories();
-		int size = kategorien.size();
-		String kategorieListe[] = new String[size];
-		for (int i = 0; i < size; i++) { 
-            kategorieListe[i] = kategorien.get(i).getKategorieName();
-		}
-		Arrays.sort(kategorieListe);
-		JComboBox kategorie_box = new JComboBox(kategorieListe);
+		/////
+		
+		kategorie_box = new JComboBox<>();
 		kategorie_box.setFont(new Font("Verdana", Font.PLAIN, 16));
 		kategorie_box.setForeground(new Color(64, 116, 161));
 		GridBagConstraints gbc_kategorie_box = new GridBagConstraints();
@@ -584,5 +572,26 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_zuruecksetzen_btn.gridx = 14;
 		gbc_zuruecksetzen_btn.gridy = 8;
 		add(zuruecksetzen_btn, gbc_zuruecksetzen_btn);	
+	}
+	
+	/**
+	 * Aktualisiert das ProduktHinzufuegenPanel.
+	 */
+	public void refresh() {
+		ArrayList<Kategorie> kategorien = JSONDemo.getAllCategories();
+		int size = kategorien.size();
+		String kategorieListe[] = new String[size];
+		
+		for (int i = 0; i < size; i++) { 
+            kategorieListe[i] = kategorien.get(i).getKategorieName();
+		}
+		
+		Arrays.sort(kategorieListe);
+		
+		kategorie_box.removeAllItems();
+		
+		for (String item : kategorieListe) {
+			kategorie_box.addItem(item);
+		}
 	}
 }

@@ -1,14 +1,14 @@
 package kassensoftware;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.io.BufferedWriter;
 import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.io.IOException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -25,22 +25,22 @@ import org.json.simple.parser.ParseException;
 public final class JSONDemo {
 	
 	/**
-	 * Die Daten werden standardmäßig in der Datei <code>dataFile</code> mit dem Namen data.json im Verzeichnis daten gespeichert.
+	 * Die Datenbank wird in der Datei <code>dataFile</code> mit dem Namen data.json im Verzeichnis daten gespeichert.
 	 */
-	private static String dataFilename = "data.json";
-	private static String dataDirectory = "daten";
-	private static String dataPath = dataDirectory + "/" + dataFilename;
+	private static final String dataFilename = "data.json";
+	private static final String dataDirectory = "daten";
+	private static final String dataPath = dataDirectory + "/" + dataFilename;
 	private static String dataContent = "{\n\t\"products\": [],\n\t\"categories\": []\n}";
-	private static File dataFile = new File(dataPath);
+	private static final File dataFile = new File(dataPath);
 	
 	
 	/**
-	 * Speichert ein nicht leeres Produkt in <code>dataFile</code> ab.
+	 * Speichert ein nicht leeres Produkt in der Datenbank ab.
 	 * Wenn bereits ein Produkt mit der gleichen EAN existiert, wird es überschrieben.
 	 * 
 	 * @param 	produkt das Produkt, das gespeichert werden soll
 	 * @return 	<code>true</code>, falls das Produkt erfolgreich gespeichert wurde;
-	 * 			sonst <code>false</code> 
+	 * 			sonst <code>false</code>
 	 */	
 	public static boolean produktSpeichern(Produkt produkt) {
 		// Keine leeren Produkte speichern
@@ -81,7 +81,7 @@ public final class JSONDemo {
     		index++;
     	}
     	
-    	// Falls das Produkt noch nicht in der Datenbank ist
+    	// Falls Änderungen vorgenommen wurden
 	    if (!modified) {
     		list.add(neuesProdukt);
     		modified = true;
@@ -97,9 +97,9 @@ public final class JSONDemo {
 	
 	
 	/**
-	 * Speichert eine nicht leere Kategorie in <code>dataFile</code> ab.
+	 * Speichert eine nicht-leere Kategorie in der Datenbank.
 	 * 
-	 * @param 	kategorie	Kategorie, die gespeichert werden soll
+	 * @param 	kategorie	die Kategorie, die gespeichert werden soll
 	 * @return 	<code>true</code>, falls die Kategorie erfolgreich gespeichert wurde;
 	 * 			sonst <code>false</code> 
 	 */	
@@ -110,8 +110,6 @@ public final class JSONDemo {
 		}
 		
 		Map<String, String> map = new HashMap<>();
-		
-		// Eigenschaften übernehmen
 		map.put("Name", kategorie.getKategorieName());
 		
 		// neues JSONObject erzeugen
@@ -134,11 +132,11 @@ public final class JSONDemo {
 	
 	
 	/**
-	 * Sucht in <code>dataFile</code> nach einem Eintrag mit der EAN <code>ean</code>
+	 * Sucht nach einem Produkt mit der EAN <code>ean</code>
 	 * und gibt bei Erfolg das zugehörige Produkt zurück.
 	 * 
 	 * @param	ean	EAN des gesuchten Produktes
-	 * @return	das <code>Produkt</code> zur zugehörigen <code>ean</code>;
+	 * @return	<code>Produkt</code> zur zugehörigen <code>ean</code>;
 	 * 			<code>null</code>, falls kein Produkt mit dieser EAN gefunden wurde
 	 */
 	public static Produkt getProdukt(String ean) {
@@ -151,7 +149,7 @@ public final class JSONDemo {
 	    	while (iter.hasNext()) {
 	    		JSONObject item = iter.next();
 	    		
-	    		// Falls das Produkt mit der gleichen EAN gefunden wurde
+	    		// Falls ein Produkt mit der gleichen EAN gefunden wurde
 	    		if (ean.compareTo(item.get("EAN").toString()) == 0) {
 	    			String name = item.get("Name").toString();
 	    			Float preis = Float.parseFloat(item.get("Preis").toString());
@@ -169,34 +167,42 @@ public final class JSONDemo {
 		return null;
 	}
 	
+	
 	/**
-	 * Sucht in <code>dataFile</code> nach allen Produkten mit dem Namen <code>name</code>
-	 * oder 
+	 * Sucht nach allen Produkten deren Name oder EAN gleich <code>suchString</code> ist
+	 * oder ein Teilwort davon bildet.
 	 * 
-	 * @param	name	Name des gesuchten Produktes
-	 * @return	<code>ArrayList</code> mit den Produkten, deren Name mit <code>name</code> übereinstimmt
-	 * 			oder ihn in ihrem Namen enthalten;
-	 * 			die <code>ArrayList</code> ist leer, wenn keine Produkte mit passenden Namen gefunden wurden
+	 * @param	suchString	
+	 * @return	<code>ArrayList</code> mit den Produkten, die die Suchbedingungen erfüllen;
+	 * 			sonst ist die <code>ArrayList</code> leer
 	 */
 	public static ArrayList<Produkt> produktSuchen(String suchString) {
 		ArrayList<Produkt> produkte = getAllProducts();
-		ArrayList<Produkt> liste = new ArrayList<>();
+		ArrayList<Produkt> list = new ArrayList<>();
 		
 		for (Produkt element : produkte) {
-			if (element.getName().contains(suchString) || element.getEan().contains(suchString)) {
-				liste.add(element);
+			if (element.getName().contains(suchString)) {
+				list.add(element);
+				continue;
+			}
+			
+			// die Anfänge der EAN mit dem suchString vergleichen
+			if (element.getEan().contains(suchString)) {
+				if (element.getEan().substring(0, suchString.length()).compareTo(suchString) == 0) {
+					list.add(element);
+				}
 			}
 		}
 		
-		return liste;
+		return list;
 	}
 	
 	
 	/**
-	 * Erstellt eine Liste mit allen Produkten aus <code>dataFile</code> und gibt diese zurück.
+	 * Erstellt eine Liste mit allen Produkten aus der Datenbank und gibt diese zurück.
 	 * Sind keine Produkte gespeichert, wird eine leere Produktliste zurückgegeben.
 	 * 
-	 * @return	Produktliste mit den Produkten aus der Datenbank
+	 * @return	<code>ArrayList</code> mit allen Produkten
 	 */
 	public static ArrayList<Produkt> getAllProducts() {
 		ArrayList<Produkt> produktListe = new ArrayList<>();
@@ -228,11 +234,11 @@ public final class JSONDemo {
 	
 	
 	/**
-	 * Sucht in <code>dataFile</code> nach der Kategorie mit dem Namen <code>name</code>
-	 * und gibt bei Erfolg eine Kategorie zurück.
+	 * Sucht in der Datenbank nach der Kategorie mit dem Namen <code>name</code>
+	 * und gibt bei Erfolg diese zurück.
 	 * 
 	 * @param	name	Name der gesuchten Kategorie
-	 * @return	die Kategorie mit dem Name <code>name</code>;
+	 * @return	die Kategorie mit dem Namen <code>name</code>;
 	 * 			<code>null</code>, falls keine Kategorie mit dem Namen gefunden wurde
 	 */
 	public static Kategorie getKategorie(String name) {
@@ -257,7 +263,7 @@ public final class JSONDemo {
 	 * Erstellt eine Liste mit allen Kategorien aus <code>dataFile</code> und gibt diese zurück.
 	 * Sind keine Kategorien gespeichert, wird eine leere Kategorienliste zurückgegeben.
 	 * 
-	 * @return	Kategorienliste mit den Kategorien aus der Datenbank
+	 * @return	<code>ArrayList<code> mit den Kategorien
 	 */
 	public static ArrayList<Kategorie> getAllCategories() {
 		ArrayList<Kategorie> kategorieListe = new ArrayList<>();
@@ -265,7 +271,7 @@ public final class JSONDemo {
 		
 	    // Iteriere und füge nacheinander alle Kategorien aus der Datenbank hinzu
 	    Iterator<JSONObject> iter = list.iterator();
-	    	
+	    
 	    while (iter.hasNext()) {
 	    	kategorieListe.add(new Kategorie(iter.next().get("Name").toString()));
 	    }
@@ -278,8 +284,8 @@ public final class JSONDemo {
 	 * Entfernt ein Produkt aus der Datenbank, falls vorhanden.
 	 * 
 	 * @param ean	EAN des Produktes, das aus der Datenbank entfernt werden soll
-	 * @return			<code>true</code>, falls das Produkt erfolgreich entfernt wurde;
-	 * 					<code>false</code>, falls das Produkt nicht entfernt wurde
+	 * @return		<code>true</code>, falls das Produkt erfolgreich entfernt wurde;
+	 * 				<code>false</code>, falls das Produkt nicht entfernt wurde
 	 */
 	public static boolean produktEntfernen(String ean) {
 		JSONArray list = readData("products");
@@ -320,21 +326,20 @@ public final class JSONDemo {
 		
 		boolean modified = false;
     	int index = 0;
-	    	
-	    	
+	    
 	    Iterator<JSONObject> iter = list.iterator();
-	    	
+	    
 	    while (iter.hasNext() && !modified) {
 	    	JSONObject item = iter.next();
-	    		
+	    	
 	    	if (name.compareTo(item.get("Name").toString()) == 0) {
 	    		list.remove(index);
 	    		modified = true;
 	    	}
-	    		
+	    	
 	    	index++;
 	    }
-	    	
+	    
 	    if (modified && !writeData("categories", list)) {
 	    	return true;
 	    }
@@ -344,8 +349,8 @@ public final class JSONDemo {
 	
 	
 	/**
-	 * Die Datei <code>dataFile</code> wird auf den Startzustand zurückgesetzt oder neu erzeugt, falls sie vorher noch nicht vorhanden war.
-	 * Die Datei wird im Verzeichnis daten abgelegt. Zu Beginn befindet sich in der Datei ein JSONObject mit einer leeren Produkt- und Kategorieliste.
+	 * Die Datenbank <code>dataFile</code> wird auf den Startzustand zurückgesetzt oder neu erzeugt, falls sie vorher noch nicht vorhanden war.
+	 * Im Verzeichnis daten wird die Datei data.json abgelegt. Zu Beginn befindet sich in der Datei ein JSONObject mit einer leeren Produkt- und Kategorieliste.
 	 * Falls das Verzeichnis nicht existiert, wird es ebenfalls erzeugt.
 	 */
 	
@@ -404,10 +409,10 @@ public final class JSONDemo {
 	
 	
 	/**
-	 * Schreibt Daten in die Datenbank zum zugehörigen <code>key</code>.
+	 * Schreibt Werte in die Datenbank zum zugehörigen <code>key</code>.
 	 * 
 	 * @param key	Schlüssel für die Daten
-	 * @param list	Daten, die zum <code>key</code> geschrieben werden sollen
+	 * @param list	Werte, die zum <code>key</code> geschrieben werden sollen
 	 * @return		<code>true</code>, falls die Daten erfolgreich in die Datenbank
 	 * 				geschrieben wurden;
 	 * 				<code>false</code>, falls die Daten nicht geschrieben werden konnten
@@ -425,6 +430,7 @@ public final class JSONDemo {
 		    BufferedWriter writer = new BufferedWriter(new FileWriter(dataPath));
 		    obj.writeJSONString(writer);
 		    writer.close();
+		    
 		    return true;
 		}
 		catch (ParseException e) {
