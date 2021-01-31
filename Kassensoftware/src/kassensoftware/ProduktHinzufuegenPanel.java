@@ -2,29 +2,30 @@ package kassensoftware;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import javax.swing.border.EmptyBorder;
 import java.awt.Insets;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
 
 /**
  * Ueber das <code>ProduktHinzufuegenPanel</code> kann der Nutzer die Produkteigenschaften selbst waehlen
- * und mit diesen Eigenschaften ein Produkt erstellen
+ * und mit diesen Eigenschaften ein Produkt erstellen.
  * @author Helena Schulz
  */
 public class ProduktHinzufuegenPanel extends JPanel {
@@ -35,12 +36,19 @@ public class ProduktHinzufuegenPanel extends JPanel {
 	private JTextField preis_txt;
 	private JTextField anzahl_txt;
 	
+	private JComboBox<String> ean_box;
+	private JComboBox<String> gewicht_box;
+	private JComboBox<String> anzahl_box;
 	private JComboBox<String> kategorie_box;
-
+	
+	private Boolean bearbeitet = false;
+	
 	/**
 	 * Standardkonstruktor fuer das <code>ProduktHinzufuegenPanel</code>.
 	 */
 	public ProduktHinzufuegenPanel() {
+		this.setBackground(Color.WHITE);
+		this.setBorder(new EmptyBorder(20, 20, 20, 20));
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 110, 0, 40, 0, -1, 0, 22, 0, 0, 0, 0, 0, 0, 0, 49, 0, 0, 0};
@@ -73,7 +81,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		name_txt = new JTextField();
 		name_txt.setFont(new Font("Verdana", Font.PLAIN, 16));
 		name_txt.setForeground(new Color(0, 69, 129));
-		//Nutzer kommt nur weiter, wenn Name keine Ziffern enthaelt und zwischen 2 und 32 Zeichen lang ist
+		// Nutzer kommt nur weiter, wenn Name keine Ziffern enthaelt und zwischen 2 und 32 Zeichen lang ist
 		name_txt.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -117,10 +125,13 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_ean_lbl.gridy = 2;
 		add(ean_lbl, gbc_ean_lbl);
 		
-		JComboBox ean_box = new JComboBox();
+		// Auswahl für das Format der EAN
+		ean_box = new JComboBox<>();
 		ean_box.setFont(new Font("Verdana", Font.PLAIN, 16));
 		ean_box.setForeground(new Color(0, 69, 129));
-		ean_box.setModel(new DefaultComboBoxModel(new String[] {"EAN-8", "EAN-13"}));
+		ean_box.addItem("EAN-8");
+		ean_box.addItem("EAN-13");
+		
 		GridBagConstraints gbc_ean_box = new GridBagConstraints();
 		gbc_ean_box.gridwidth = 2;
 		gbc_ean_box.insets = new Insets(0, 0, 5, 5);
@@ -178,10 +189,15 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_gewicht_lbl.gridy = 3;
 		add(gewicht_lbl, gbc_gewicht_lbl);
 		
-		JComboBox gewicht_box = new JComboBox();
+		// Auswahl der Gewichtseinheit
+		gewicht_box = new JComboBox<>();
 		gewicht_box.setFont(new Font("Verdana", Font.PLAIN, 16));
 		gewicht_box.setForeground(new Color(0, 69, 129));
-		gewicht_box.setModel(new DefaultComboBoxModel(new String[] {"g", "kg", "ml", "l"}));
+		gewicht_box.addItem("g");
+		gewicht_box.addItem("kg");
+		gewicht_box.addItem("ml");
+		gewicht_box.addItem("l");
+		
 		GridBagConstraints gbc_gewicht_box = new GridBagConstraints();
 		gbc_gewicht_box.gridwidth = 2;
 		gbc_gewicht_box.insets = new Insets(0, 0, 5, 5);
@@ -331,9 +347,12 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_anzahl_lbl.gridy = 5;
 		add(anzahl_lbl, gbc_anzahl_lbl);
 		
-		JComboBox anzahl_box = new JComboBox();
+		// Auswahl des Sonderzustandes
+		anzahl_box = new JComboBox<>();
 		anzahl_box.setFont(new Font("Verdana", Font.PLAIN, 16));
 		anzahl_box.setForeground(new Color(0, 69, 129));
+		anzahl_box.addItem("Stück");
+		anzahl_box.addItem("Sonderzustand");
 		//Bei Sonderzustand kann keine Anzahl eingegeben werden
 		anzahl_box.addItemListener(new ItemListener() {
 			@Override
@@ -347,7 +366,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 				}
 			}
 		});
-		anzahl_box.setModel(new DefaultComboBoxModel(new String[] {"Stück", "Sonderzustand"}));
+		
 		GridBagConstraints gbc_anzahl_box = new GridBagConstraints();
 		gbc_anzahl_box.gridwidth = 2;
 		gbc_anzahl_box.insets = new Insets(0, 0, 5, 5);
@@ -403,11 +422,10 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_kategorie_lbl.gridy = 6;
 		add(kategorie_lbl, gbc_kategorie_lbl);
 		
-		/////
-		
 		kategorie_box = new JComboBox<>();
 		kategorie_box.setFont(new Font("Verdana", Font.PLAIN, 16));
 		kategorie_box.setForeground(new Color(0, 69, 129));
+		
 		GridBagConstraints gbc_kategorie_box = new GridBagConstraints();
 		gbc_kategorie_box.gridwidth = 12;
 		gbc_kategorie_box.insets = new Insets(0, 0, 5, 5);
@@ -429,6 +447,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 				} else {
 					name = name_txt.getText();
 				}
+				
 				//EAN
 				String ean = "";
 				if (ean_txt.getText().length() == 0) {
@@ -451,17 +470,21 @@ public class ProduktHinzufuegenPanel extends JPanel {
 				else {
 					ean = ean_txt.getText();
 				}
-				ArrayList<Produkt> produkte = JSONDemo.getAlleProdukte();
-				int size = produkte.size();
-				String produktListe[] = new String[size];
-				for (int i = 0; i < size; i++) { 
-		            produktListe[i] = produkte.get(i).getEan();
-		            if (produktListe[i].equals(ean)) {
-		            	JOptionPane.showMessageDialog(null, "Es ist bereits ein Produkt mit der eingegebenen EAN vorhanden.", "Fehler bei Bestätigung", JOptionPane.ERROR_MESSAGE);
-		            	ean = "";
-		            	break;
-		            }
+				
+				if (!bearbeitet) {
+					ArrayList<Produkt> produkte = JSONDemo.getAlleProdukte();
+					int size = produkte.size();
+					String produktListe[] = new String[size];
+					for (int i = 0; i < size; i++) { 
+			            produktListe[i] = produkte.get(i).getEan();
+			            if (produktListe[i].equals(ean)) {
+			            	JOptionPane.showMessageDialog(null, "Es ist bereits ein Produkt mit der eingegebenen EAN vorhanden.", "Fehler bei Bestätigung", JOptionPane.ERROR_MESSAGE);
+			            	ean = "";
+			            	break;
+			            }
+					}
 				}
+				
 				//Gewicht
 				Float gewicht = 0.0f;
 				if (gewicht_txt.getText().length() == 0) {
@@ -510,27 +533,22 @@ public class ProduktHinzufuegenPanel extends JPanel {
 				Kategorie kategorie = null;
 				if(kategorie_box.getItemCount() == 0) {
 					JOptionPane.showMessageDialog(null, "Dem Produkt konnte keine Kategorie zugeordnet werden. Bitte zunächst eine Kategorie erstellen.", "Fehler bei Bestätigung", JOptionPane.ERROR_MESSAGE);
-				} else {
+				}
+				else if (kategorie_box.getSelectedIndex() == -1) {
+					JOptionPane.showMessageDialog(null, "Bitte eine Kategorie auswählen.", "Fehler bei Bestätigung", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
 					kategoriename = kategorie_box.getSelectedItem().toString();
 					kategorie = JSONDemo.getKategorie(kategoriename);
 				}
+				
 				//Hinzufuegen, wenn bei allen Eigenschaften etwas eingegeben wurde
 				if (name != "" && ean != "" && gewicht != 0 && preis != 0 && kategorie != null) {
 					//Produkt hinzufuegen
 					Produkt neuesProdukt = new Produkt(name, ean, preis, gewicht, anzahl, kategorie);
 					JSONDemo.produktSpeichern(neuesProdukt);
 					JOptionPane.showMessageDialog(null, "Das Hinzufügen war erfolgreich", "Bestätigung", JOptionPane.INFORMATION_MESSAGE);
-					name_txt.setText(null);
-					ean_txt.setText(null);
-					gewicht_txt.setText(null);
-					preis_txt.setText(null);
-					anzahl_txt.setText(null);
-					ean_box.setSelectedIndex(0);
-					gewicht_box.setSelectedIndex(0);
-					anzahl_box.setSelectedIndex(0);
-					if(kategorie_box.getItemCount() != 0){
-						kategorie_box.setSelectedIndex(0);  
-					}
+					reset();
 				}
 			}
 		});
@@ -549,17 +567,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		zuruecksetzen_btn.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				name_txt.setText(null);
-				ean_txt.setText(null);
-				gewicht_txt.setText(null);
-				preis_txt.setText(null);
-				anzahl_txt.setText(null);
-				ean_box.setSelectedIndex(0);
-				gewicht_box.setSelectedIndex(0);
-				anzahl_box.setSelectedIndex(0);
-				if(kategorie_box.getItemCount() != 0){
-					kategorie_box.setSelectedIndex(0);  
-				}
+				reset();
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -578,6 +586,51 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_bearbeiten_btn.gridy = 7;
 		add(bearbeiten_btn, gbc_bearbeiten_btn);
 		
+		bearbeiten_btn.addActionListener(new ActionListener () {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				bearbeitet = true;
+				
+				String ean = ean_txt.getText();
+				
+				if (ean.length() == 8 || ean.length() == 13) {
+					Produkt produkt = JSONDemo.getProdukt(ean);
+					
+					if (produkt != null) {
+						name_txt.setText(produkt.getName());
+						gewicht_txt.setText(produkt.getGewicht().toString());
+						preis_txt.setText(produkt.getPreis().toString());
+						anzahl_txt.setText(produkt.getAnzahl());
+						
+						if (ean.length() == 8) {
+							ean_box.setSelectedIndex(0);
+						}
+						else {
+							ean_box.setSelectedIndex(1);
+						}
+						
+						gewicht_box.setSelectedIndex(0);
+						
+						if (produkt.getAnzahl().equals("n")) {
+							anzahl_box.setSelectedIndex(1);
+						}
+						else {
+							anzahl_box.setSelectedIndex(0);
+						}
+						
+						for (int i = 0; i < kategorie_box.getItemCount() - 1; i++) {
+							if (kategorie_box.getItemAt(i).equals(produkt.getKategorie().getKategorieName())) {
+								kategorie_box.setSelectedIndex(i);
+							}
+						}
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Keine gültige EAN eingegeben.", "Fehler beim Löschen", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
+		
 		JButton loeschen_btn = new JButton("Produkt löschen");
 		loeschen_btn.setForeground(new Color(0, 69, 129));
 		loeschen_btn.setFont(new Font("Verdana", Font.PLAIN, 16));
@@ -594,11 +647,32 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_zuruecksetzen_btn.gridwidth = 2;
 		gbc_zuruecksetzen_btn.gridx = 15;
 		gbc_zuruecksetzen_btn.gridy = 7;
-		add(zuruecksetzen_btn, gbc_zuruecksetzen_btn);	
+		add(zuruecksetzen_btn, gbc_zuruecksetzen_btn);
+		
+		loeschen_btn.addActionListener(new ActionListener () {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String ean = ean_txt.getText();
+				
+				if (ean.length() == 8 || ean.length() == 13) {
+					if (JSONDemo.produktEntfernen(ean)) {
+						JOptionPane.showMessageDialog(null, "Das Produkt wurde erfolgreich entfernt.", "Bestätigung", JOptionPane.INFORMATION_MESSAGE);
+						reset();
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Das Produkt konnte nicht entfernt werden.", "Fehler beim Löschen", JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Keine gültige EAN eingegeben.", "Fehler beim Löschen", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
 	}
 	
+	
 	/**
-	 * Aktualisiert das ProduktHinzufuegenPanel.
+	 * Aktualisiert das <code>ProduktHinzufuegenPanel</code>.
 	 */
 	public void refresh() {
 		ArrayList<Kategorie> kategorien = JSONDemo.getAlleKategorien();
@@ -616,5 +690,28 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		for (String item : kategorieListe) {
 			kategorie_box.addItem(item);
 		}
+		
+		kategorie_box.setSelectedIndex(-1);
+	}
+	
+	
+	/**
+	 * Setzt das Panel auf den Anfangszustand zurück.
+	 */
+	public void reset() {
+		name_txt.setText(null);
+		ean_txt.setText(null);
+		gewicht_txt.setText(null);
+		preis_txt.setText(null);
+		anzahl_txt.setText(null);
+		ean_box.setSelectedIndex(0);
+		gewicht_box.setSelectedIndex(0);
+		anzahl_box.setSelectedIndex(0);
+		
+		if (kategorie_box.getItemCount() != 0){
+			kategorie_box.setSelectedIndex(-1);  
+		}
+		
+		bearbeitet = false;
 	}
 }
