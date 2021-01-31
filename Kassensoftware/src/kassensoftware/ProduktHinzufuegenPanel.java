@@ -434,7 +434,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_kategorie_box.gridy = 6;
 		add(kategorie_box, gbc_kategorie_box);
 		
-		JButton bestaetigen_btn = new JButton("Produkt hinzufügen");
+		JButton bestaetigen_btn = new JButton("Bestätigen");
 		bestaetigen_btn.setFont(new Font("Verdana", Font.PLAIN, 16));
 		bestaetigen_btn.setForeground(new Color(0, 69, 129));
 		bestaetigen_btn.addActionListener(new ActionListener() {
@@ -500,7 +500,12 @@ public class ProduktHinzufuegenPanel extends JPanel {
 							gewicht = Float.parseFloat(gewichtsString);
 						}
 					} else {
-						gewicht = Float.parseFloat(gewichtsString);
+						if (gewicht_box.getSelectedItem() == "kg" || gewicht_box.getSelectedItem() == "l") {
+							gewicht = Float.parseFloat(gewichtsString);
+							gewicht = gewicht * 1000;
+						} else {
+							gewicht = Float.parseFloat(gewichtsString);
+						}
 					}
 				}
 				//Preis
@@ -535,7 +540,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 					JOptionPane.showMessageDialog(null, "Dem Produkt konnte keine Kategorie zugeordnet werden. Bitte zunächst eine Kategorie erstellen.", "Fehler bei Bestätigung", JOptionPane.ERROR_MESSAGE);
 				}
 				else if (kategorie_box.getSelectedIndex() == -1) {
-					JOptionPane.showMessageDialog(null, "Bitte eine Kategorie auswählen.", "Fehler bei Bestätigung", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Keine Kategorie ausgewählt.", "Fehler bei Bestätigung", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
 					kategoriename = kategorie_box.getSelectedItem().toString();
@@ -547,7 +552,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 					//Produkt hinzufuegen
 					Produkt neuesProdukt = new Produkt(name, ean, preis, gewicht, anzahl, kategorie);
 					JSONDemo.produktSpeichern(neuesProdukt);
-					JOptionPane.showMessageDialog(null, "Das Hinzufügen war erfolgreich", "Bestätigung", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Das Produkt wurde erfolgreich hinzugefügt/ bearbeitet.", "Bestätigung", JOptionPane.INFORMATION_MESSAGE);
 					reset();
 				}
 			}
@@ -563,7 +568,6 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		JButton zuruecksetzen_btn = new JButton("Zurücksetzen");
 		zuruecksetzen_btn.setFont(new Font("Verdana", Font.PLAIN, 16));
 		zuruecksetzen_btn.setForeground(new Color(0, 69, 129));
-		//Alle Komponenten leeren, bzw. auf default zuruecksetzen
 		zuruecksetzen_btn.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -626,7 +630,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 					}
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "Keine gültige EAN eingegeben.", "Fehler beim Löschen", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Keine gültige EAN eingegeben.", "Fehler beim Bearbeiten", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
