@@ -23,7 +23,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 
 /**
- * Über das ProduktHinzufuegenPanel kann der Nutzer die Produkteigenschaften selbst wählen
+ * Ueber das <code>ProduktHinzufuegenPanel</code> kann der Nutzer die Produkteigenschaften selbst waehlen
  * und mit diesen Eigenschaften ein Produkt erstellen
  * @author Helena Schulz
  */
@@ -38,7 +38,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 	private JComboBox<String> kategorie_box;
 
 	/**
-	 * Create the panel.
+	 * Standardkonstruktor fuer das <code>ProduktHinzufuegenPanel</code>.
 	 */
 	public ProduktHinzufuegenPanel() {
 		
@@ -73,6 +73,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		name_txt = new JTextField();
 		name_txt.setFont(new Font("Verdana", Font.PLAIN, 16));
 		name_txt.setForeground(new Color(0, 69, 129));
+		//Nutzer kommt nur weiter, wenn Name keine Ziffern enthaelt und zwischen 2 und 32 Zeichen lang ist
 		name_txt.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -131,6 +132,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		ean_txt = new JTextField();
 		ean_txt.setFont(new Font("Verdana", Font.PLAIN, 16));
 		ean_txt.setForeground(new Color(0, 69, 129));
+		//Nutzer kommt nur weiter, wenn EAN eine Zahl ist und nicht laenger als 8, bzw. 13 Zeichen ist
 		ean_txt.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -191,6 +193,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gewicht_txt = new JTextField();
 		gewicht_txt.setFont(new Font("Verdana", Font.PLAIN, 16));
 		gewicht_txt.setForeground(new Color(0, 69, 129));
+		//Nutzer kommt nur weiter, wenn Gewicht eine Zahl ist und 0,001 bis 100kg, oder 1 bis 100.000, oder 0,001 bis 10l, oder 1 bis 10.000 ml groß ist
 		gewicht_txt.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -268,6 +271,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		preis_txt = new JTextField();
 		preis_txt.setFont(new Font("Verdana", Font.PLAIN, 16));
 		preis_txt.setForeground(new Color(0, 69, 129));
+		//Nutzer kommt nur weiter, wenn Preis eine Zahl ist und zwischen 0,01 und 100.000 Euro liegt
 		preis_txt.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -330,6 +334,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		JComboBox anzahl_box = new JComboBox();
 		anzahl_box.setFont(new Font("Verdana", Font.PLAIN, 16));
 		anzahl_box.setForeground(new Color(0, 69, 129));
+		//Bei Sonderzustand kann keine Anzahl eingegeben werden
 		anzahl_box.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
@@ -354,6 +359,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		anzahl_txt = new JTextField();
 		anzahl_txt.setFont(new Font("Verdana", Font.PLAIN, 16));
 		anzahl_txt.setForeground(new Color(0, 69, 129));
+		//Nutzer kommt nur weiter, wenn Anzahl eine Zahl ist und nicht groeßer als 1.000 Stueck ist
 		anzahl_txt.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -372,10 +378,6 @@ public class ProduktHinzufuegenPanel extends JPanel {
 						}
 						if (anzahl_box.getSelectedItem() == "Stück" && anzahl > 1000) {
 							JOptionPane.showMessageDialog(null, "Die eingegebene Anzahl ist zu groß.", "Fehler bei Bestand-Eingabe", JOptionPane.ERROR_MESSAGE);
-							anzahl_txt.requestFocus();
-						}
-						else if (anzahl_box.getSelectedItem() == "Gesamtgewicht" && anzahl > 100000) {
-							JOptionPane.showMessageDialog(null, "Das eingegebene Gesamtgewicht ist zu groß.", "Fehler bei Bestand-Eingabe", JOptionPane.ERROR_MESSAGE);
 							anzahl_txt.requestFocus();
 						}
 					}
@@ -493,14 +495,12 @@ public class ProduktHinzufuegenPanel extends JPanel {
 					}
 				}
 				//Anzahl
-				//Integer anzahl = 0;
 				String anzahl = "";
 				if (anzahl_box.getSelectedItem() == "Sonderzustand") {
 					anzahl = "n";
 				} else {
 					if (anzahl_txt.getText().length() > 0) {
 						anzahl = anzahl_txt.getText();
-						//anzahl = Integer.parseInt(anzahl_txt.getText());
 					} else {
 						anzahl = "0";
 					}
@@ -514,9 +514,9 @@ public class ProduktHinzufuegenPanel extends JPanel {
 					kategoriename = kategorie_box.getSelectedItem().toString();
 					kategorie = JSONDemo.getKategorie(kategoriename);
 				}
-				//Hinzufügen
+				//Hinzufuegen, wenn bei allen Eigenschaften etwas eingegeben wurde
 				if (name != "" && ean != "" && gewicht != 0 && preis != 0 && kategorie != null) {
-					//Produkt hinzufügen
+					//Produkt hinzufuegen
 					Produkt neuesProdukt = new Produkt(name, ean, preis, gewicht, anzahl, kategorie);
 					JSONDemo.produktSpeichern(neuesProdukt);
 					JOptionPane.showMessageDialog(null, "Das Hinzufügen war erfolgreich", "Bestätigung", JOptionPane.INFORMATION_MESSAGE);
@@ -545,6 +545,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		JButton zuruecksetzen_btn = new JButton("Zurücksetzen");
 		zuruecksetzen_btn.setFont(new Font("Verdana", Font.PLAIN, 16));
 		zuruecksetzen_btn.setForeground(new Color(0, 69, 129));
+		//Alle Komponenten leeren, bzw. auf default zuruecksetzen
 		zuruecksetzen_btn.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
