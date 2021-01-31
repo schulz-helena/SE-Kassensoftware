@@ -1,4 +1,3 @@
-package kassensoftware;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -19,7 +18,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
 /**
- * Klasse fÃ¼r die GUI des Einkaufs.
+ * Klasse für die GUI des Einkaufs.
  * 
  * @author Nils Kohler
  *
@@ -100,7 +99,7 @@ public class EinkaufPanel extends JPanel {
 					textArea.setText(rechnung.rechnungAktualisieren(rech));
 					textField_1.setText(null);
 					textField.setText(null);
-					JOptionPane.showMessageDialog(null, "Das Produkt wurde storniert.", "BestÃ¤tigung",
+					JOptionPane.showMessageDialog(null, "Das Produkt wurde storniert.", "Bestätigung",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
 
@@ -165,12 +164,16 @@ public class EinkaufPanel extends JPanel {
 					gefProdukteAnzeigen(gefProdukte);
 					textField_1.setText(null);
 				} else if (gefProdukte.size() == 1) {
-					if (textField_1.getText().isEmpty()) {
+					String temp = textField_1.getText();
+					if (temp.isEmpty()) {
 						JOptionPane.showMessageDialog(null, "Geben Sie eine Anzahl an.", "Fehler",
+								JOptionPane.ERROR_MESSAGE);
+					} else if (temp.matches("[0-9]+") == false) {
+						JOptionPane.showMessageDialog(null, "Die Anzahl darf nur Zahlen enthalten und mus in g (Gramm) angegeben werden.", "Fehler",
 								JOptionPane.ERROR_MESSAGE);
 					} else {
 						Produkt p = gefProdukte.get(0);
-						einkaufsliste.produktHinzufuegen(p);						
+						einkaufsliste.produktHinzufuegen(p);
 						rech.put(p, textField_1.getText());
 						rechnung = new Rechnung(0f, einkaufsliste);
 						textArea.setText(rechnung.rechnungAktualisieren(rech));
@@ -178,7 +181,7 @@ public class EinkaufPanel extends JPanel {
 						textField.setText(null);
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "Das sollte nicht passieren. Merk dir was du eingegeben hast.",
+					JOptionPane.showMessageDialog(null, "Das sollte nicht passieren. Melden Sie sich bei der IT-Abteilung.",
 							"Fehler", JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -225,7 +228,7 @@ public class EinkaufPanel extends JPanel {
 						+ String.format("%-25s %-15s %-15s\n", "----------", "-------", "--------");
 				textArea.setText(rechnungHead + "Aktuell werden keine Produkte gekauft.");
 
-				JOptionPane.showMessageDialog(null, "Der Einkauf wurde storniert.", "BestÃ¤tigung",
+				JOptionPane.showMessageDialog(null, "Der Einkauf wurde storniert.", "Bestätigung",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
@@ -239,7 +242,7 @@ public class EinkaufPanel extends JPanel {
 				} else {
 					Float geldNeu = Float.parseFloat(textField_2.getText());
 					if (geldNeu < 0) {
-						JOptionPane.showMessageDialog(null, "Keine negativen Eingaben mÃ¶glich.", "Fehler",
+						JOptionPane.showMessageDialog(null, "Keine negativen Eingaben möglich.", "Fehler",
 								JOptionPane.ERROR_MESSAGE);
 						textField_2.setText(null);
 					} else {
@@ -297,7 +300,7 @@ public class EinkaufPanel extends JPanel {
 	/**
 	 * Methode um den Bestand eines Produktes zu aktualisieren. Es wird nach dem
 	 * Sonderzustand n gesucht und dann das Produktgewicht reduziert, sonst der
-	 * Bestand. Das Produkt mit den "alten" Angaben wird Ã¼berschrieben.
+	 * Bestand. Das Produkt mit den "alten" Angaben wird überschrieben.
 	 * 
 	 * @param rech2 HashMap beinhaltet das Produkt und die Anzahl die gekauft werden
 	 *              soll.
@@ -306,7 +309,7 @@ public class EinkaufPanel extends JPanel {
 		for (Map.Entry<Produkt, String> entry : rech2.entrySet()) {
 			Produkt key = entry.getKey();
 			String value = entry.getValue();
-			// Sonderzustand n Ã¼berprÃ¼ft
+			// Sonderzustand n überprüft
 			if (key.getAnzahl().compareTo("n") == 0) {
 				Float anzAlt = key.getGewicht();
 				Float anzAenderUm = Float.parseFloat(value);
@@ -330,7 +333,7 @@ public class EinkaufPanel extends JPanel {
 	 * Methode um ein Produkt mittels <code>ean</code> oder <code>name</code> zu
 	 * finden.
 	 * 
-	 * @param s enthÃ¤lt <code>ean</code> oder <code>name</code>
+	 * @param s enthält <code>ean</code> oder <code>name</code>
 	 * @return <code>ArrayList</code> mit gefundenen Produkten oder leere
 	 *         <code>ArrayList</code>
 	 */
