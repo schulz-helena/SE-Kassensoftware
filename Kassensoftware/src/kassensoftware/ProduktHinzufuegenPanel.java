@@ -43,17 +43,17 @@ public class ProduktHinzufuegenPanel extends JPanel {
 	public ProduktHinzufuegenPanel() {
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 110, 0, 40, 0, -1, 0, 22, 0, 0, 0, 0, 0, 0, 49, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{133, 65, 65, 65, 65, 65, 80, 173, 92, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{0, 110, 0, 40, 0, -1, 0, 22, 0, 0, 0, 0, 0, 0, 0, 49, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{90, 65, 65, 65, 65, 65, 80, 92, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JLabel ueberschrift_lbl = new JLabel("Produkt hinzufügen");
+		JLabel ueberschrift_lbl = new JLabel("Produkte");
 		ueberschrift_lbl.setFont(new Font("Verdana", Font.BOLD, 20));
 		ueberschrift_lbl.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_ueberschrift_lbl = new GridBagConstraints();
-		gbc_ueberschrift_lbl.gridwidth = 15;
+		gbc_ueberschrift_lbl.gridwidth = 16;
 		gbc_ueberschrift_lbl.insets = new Insets(0, 0, 5, 5);
 		gbc_ueberschrift_lbl.gridx = 1;
 		gbc_ueberschrift_lbl.gridy = 0;
@@ -125,7 +125,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_ean_box.gridwidth = 2;
 		gbc_ean_box.insets = new Insets(0, 0, 5, 5);
 		gbc_ean_box.fill = GridBagConstraints.HORIZONTAL;
-		gbc_ean_box.gridx = 14;
+		gbc_ean_box.gridx = 15;
 		gbc_ean_box.gridy = 2;
 		add(ean_box, gbc_ean_box);
 		
@@ -186,7 +186,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_gewicht_box.gridwidth = 2;
 		gbc_gewicht_box.insets = new Insets(0, 0, 5, 5);
 		gbc_gewicht_box.fill = GridBagConstraints.HORIZONTAL;
-		gbc_gewicht_box.gridx = 14;
+		gbc_gewicht_box.gridx = 15;
 		gbc_gewicht_box.gridy = 3;
 		add(gewicht_box, gbc_gewicht_box);
 		
@@ -317,7 +317,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		GridBagConstraints gbc_euro_lbl = new GridBagConstraints();
 		gbc_euro_lbl.anchor = GridBagConstraints.WEST;
 		gbc_euro_lbl.insets = new Insets(0, 0, 5, 5);
-		gbc_euro_lbl.gridx = 14;
+		gbc_euro_lbl.gridx = 15;
 		gbc_euro_lbl.gridy = 4;
 		add(euro_lbl, gbc_euro_lbl);
 		
@@ -352,7 +352,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_anzahl_box.gridwidth = 2;
 		gbc_anzahl_box.insets = new Insets(0, 0, 5, 5);
 		gbc_anzahl_box.fill = GridBagConstraints.HORIZONTAL;
-		gbc_anzahl_box.gridx = 14;
+		gbc_anzahl_box.gridx = 15;
 		gbc_anzahl_box.gridy = 5;
 		add(anzahl_box, gbc_anzahl_box);
 		
@@ -416,7 +416,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		gbc_kategorie_box.gridy = 6;
 		add(kategorie_box, gbc_kategorie_box);
 		
-		JButton bestaetigen_btn = new JButton("Hinzufügen bestätigen");
+		JButton bestaetigen_btn = new JButton("Produkt hinzufügen");
 		bestaetigen_btn.setFont(new Font("Verdana", Font.PLAIN, 16));
 		bestaetigen_btn.setForeground(new Color(0, 69, 129));
 		bestaetigen_btn.addActionListener(new ActionListener() {
@@ -536,10 +536,10 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		});
 		GridBagConstraints gbc_bestaetigen_btn = new GridBagConstraints();
 		gbc_bestaetigen_btn.fill = GridBagConstraints.BOTH;
-		gbc_bestaetigen_btn.gridwidth = 12;
+		gbc_bestaetigen_btn.gridwidth = 2;
 		gbc_bestaetigen_btn.insets = new Insets(0, 0, 0, 5);
 		gbc_bestaetigen_btn.gridx = 2;
-		gbc_bestaetigen_btn.gridy = 8;
+		gbc_bestaetigen_btn.gridy = 7;
 		add(bestaetigen_btn, gbc_bestaetigen_btn);
 		
 		JButton zuruecksetzen_btn = new JButton("Zurücksetzen");
@@ -566,12 +566,34 @@ public class ProduktHinzufuegenPanel extends JPanel {
 				
 			}
 		});
+		
+		JButton bearbeiten_btn = new JButton("Produkt bearbeiten");
+		bearbeiten_btn.setForeground(new Color(0, 69, 129));
+		bearbeiten_btn.setFont(new Font("Verdana", Font.PLAIN, 16));
+		GridBagConstraints gbc_bearbeiten_btn = new GridBagConstraints();
+		gbc_bearbeiten_btn.gridwidth = 2;
+		gbc_bearbeiten_btn.fill = GridBagConstraints.BOTH;
+		gbc_bearbeiten_btn.insets = new Insets(0, 0, 0, 5);
+		gbc_bearbeiten_btn.gridx = 4;
+		gbc_bearbeiten_btn.gridy = 7;
+		add(bearbeiten_btn, gbc_bearbeiten_btn);
+		
+		JButton loeschen_btn = new JButton("Produkt löschen");
+		loeschen_btn.setForeground(new Color(0, 69, 129));
+		loeschen_btn.setFont(new Font("Verdana", Font.PLAIN, 16));
+		GridBagConstraints gbc_loeschen_btn = new GridBagConstraints();
+		gbc_loeschen_btn.gridwidth = 8;
+		gbc_loeschen_btn.fill = GridBagConstraints.BOTH;
+		gbc_loeschen_btn.insets = new Insets(0, 0, 0, 5);
+		gbc_loeschen_btn.gridx = 6;
+		gbc_loeschen_btn.gridy = 7;
+		add(loeschen_btn, gbc_loeschen_btn);
 		GridBagConstraints gbc_zuruecksetzen_btn = new GridBagConstraints();
 		gbc_zuruecksetzen_btn.insets = new Insets(0, 0, 0, 5);
 		gbc_zuruecksetzen_btn.fill = GridBagConstraints.BOTH;
 		gbc_zuruecksetzen_btn.gridwidth = 2;
-		gbc_zuruecksetzen_btn.gridx = 14;
-		gbc_zuruecksetzen_btn.gridy = 8;
+		gbc_zuruecksetzen_btn.gridx = 15;
+		gbc_zuruecksetzen_btn.gridy = 7;
 		add(zuruecksetzen_btn, gbc_zuruecksetzen_btn);	
 	}
 	
