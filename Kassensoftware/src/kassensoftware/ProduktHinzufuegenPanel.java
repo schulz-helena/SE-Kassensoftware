@@ -41,7 +41,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public ProduktHinzufuegenPanel() {
-		this.setSize(1650, 1080);
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 110, 0, 40, 0, -1, 0, 22, 0, 0, 0, 0, 0, 0, 49, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{133, 65, 65, 65, 65, 65, 80, 173, 92, 0};
@@ -51,7 +51,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		JLabel ueberschrift_lbl = new JLabel("Produkt hinzufügen");
 		ueberschrift_lbl.setFont(new Font("Verdana", Font.BOLD, 20));
-		ueberschrift_lbl.setForeground(new Color(64, 116, 161));
+		ueberschrift_lbl.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_ueberschrift_lbl = new GridBagConstraints();
 		gbc_ueberschrift_lbl.gridwidth = 15;
 		gbc_ueberschrift_lbl.insets = new Insets(0, 0, 5, 5);
@@ -62,7 +62,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		JLabel name_lbl = new JLabel("Produktname:");
 		name_lbl.setFont(new Font("Verdana", Font.PLAIN, 16));
-		name_lbl.setForeground(new Color(64, 116, 161));
+		name_lbl.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_name_lbl = new GridBagConstraints();
 		gbc_name_lbl.anchor = GridBagConstraints.EAST;
 		gbc_name_lbl.insets = new Insets(0, 0, 5, 5);
@@ -72,7 +72,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		name_txt = new JTextField();
 		name_txt.setFont(new Font("Verdana", Font.PLAIN, 16));
-		name_txt.setForeground(new Color(64, 116, 161));
+		name_txt.setForeground(new Color(0, 69, 129));
 		name_txt.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -108,7 +108,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		JLabel ean_lbl = new JLabel("EAN:");
 		ean_lbl.setFont(new Font("Verdana", Font.PLAIN, 16));
-		ean_lbl.setForeground(new Color(64, 116, 161));
+		ean_lbl.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_ean_lbl = new GridBagConstraints();
 		gbc_ean_lbl.anchor = GridBagConstraints.EAST;
 		gbc_ean_lbl.insets = new Insets(0, 0, 5, 5);
@@ -118,7 +118,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		JComboBox ean_box = new JComboBox();
 		ean_box.setFont(new Font("Verdana", Font.PLAIN, 16));
-		ean_box.setForeground(new Color(64, 116, 161));
+		ean_box.setForeground(new Color(0, 69, 129));
 		ean_box.setModel(new DefaultComboBoxModel(new String[] {"EAN-8", "EAN-13"}));
 		GridBagConstraints gbc_ean_box = new GridBagConstraints();
 		gbc_ean_box.gridwidth = 2;
@@ -130,7 +130,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		ean_txt = new JTextField();
 		ean_txt.setFont(new Font("Verdana", Font.PLAIN, 16));
-		ean_txt.setForeground(new Color(64, 116, 161));
+		ean_txt.setForeground(new Color(0, 69, 129));
 		ean_txt.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -168,7 +168,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		JLabel gewicht_lbl = new JLabel("Gewicht:");
 		gewicht_lbl.setFont(new Font("Verdana", Font.PLAIN, 16));
-		gewicht_lbl.setForeground(new Color(64, 116, 161));
+		gewicht_lbl.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_gewicht_lbl = new GridBagConstraints();
 		gbc_gewicht_lbl.anchor = GridBagConstraints.EAST;
 		gbc_gewicht_lbl.insets = new Insets(0, 0, 5, 5);
@@ -178,7 +178,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		JComboBox gewicht_box = new JComboBox();
 		gewicht_box.setFont(new Font("Verdana", Font.PLAIN, 16));
-		gewicht_box.setForeground(new Color(64, 116, 161));
+		gewicht_box.setForeground(new Color(0, 69, 129));
 		gewicht_box.setModel(new DefaultComboBoxModel(new String[] {"g", "kg", "ml", "l"}));
 		GridBagConstraints gbc_gewicht_box = new GridBagConstraints();
 		gbc_gewicht_box.gridwidth = 2;
@@ -190,7 +190,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		gewicht_txt = new JTextField();
 		gewicht_txt.setFont(new Font("Verdana", Font.PLAIN, 16));
-		gewicht_txt.setForeground(new Color(64, 116, 161));
+		gewicht_txt.setForeground(new Color(0, 69, 129));
 		gewicht_txt.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -257,7 +257,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		JLabel preis_lbl = new JLabel("Preis:");
 		preis_lbl.setFont(new Font("Verdana", Font.PLAIN, 16));
-		preis_lbl.setForeground(new Color(64, 116, 161));
+		preis_lbl.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_preis_lbl = new GridBagConstraints();
 		gbc_preis_lbl.anchor = GridBagConstraints.EAST;
 		gbc_preis_lbl.insets = new Insets(0, 0, 5, 5);
@@ -267,7 +267,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		preis_txt = new JTextField();
 		preis_txt.setFont(new Font("Verdana", Font.PLAIN, 16));
-		preis_txt.setForeground(new Color(64, 116, 161));
+		preis_txt.setForeground(new Color(0, 69, 129));
 		preis_txt.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -309,7 +309,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		JLabel euro_lbl = new JLabel("€");
 		euro_lbl.setFont(new Font("Verdana", Font.PLAIN, 16));
-		euro_lbl.setForeground(new Color(64, 116, 161));
+		euro_lbl.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_euro_lbl = new GridBagConstraints();
 		gbc_euro_lbl.anchor = GridBagConstraints.WEST;
 		gbc_euro_lbl.insets = new Insets(0, 0, 5, 5);
@@ -319,7 +319,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		JLabel anzahl_lbl = new JLabel("Bestand:");
 		anzahl_lbl.setFont(new Font("Verdana", Font.PLAIN, 16));
-		anzahl_lbl.setForeground(new Color(64, 116, 161));
+		anzahl_lbl.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_anzahl_lbl = new GridBagConstraints();
 		gbc_anzahl_lbl.anchor = GridBagConstraints.EAST;
 		gbc_anzahl_lbl.insets = new Insets(0, 0, 5, 5);
@@ -329,7 +329,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		JComboBox anzahl_box = new JComboBox();
 		anzahl_box.setFont(new Font("Verdana", Font.PLAIN, 16));
-		anzahl_box.setForeground(new Color(64, 116, 161));
+		anzahl_box.setForeground(new Color(0, 69, 129));
 		anzahl_box.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
@@ -353,7 +353,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		anzahl_txt = new JTextField();
 		anzahl_txt.setFont(new Font("Verdana", Font.PLAIN, 16));
-		anzahl_txt.setForeground(new Color(64, 116, 161));
+		anzahl_txt.setForeground(new Color(0, 69, 129));
 		anzahl_txt.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -393,7 +393,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		JLabel kategorie_lbl = new JLabel("Kategorie:");
 		kategorie_lbl.setFont(new Font("Verdana", Font.PLAIN, 16));
-		kategorie_lbl.setForeground(new Color(64, 116, 161));
+		kategorie_lbl.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_kategorie_lbl = new GridBagConstraints();
 		gbc_kategorie_lbl.anchor = GridBagConstraints.EAST;
 		gbc_kategorie_lbl.insets = new Insets(0, 0, 5, 5);
@@ -405,7 +405,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		kategorie_box = new JComboBox<>();
 		kategorie_box.setFont(new Font("Verdana", Font.PLAIN, 16));
-		kategorie_box.setForeground(new Color(64, 116, 161));
+		kategorie_box.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_kategorie_box = new GridBagConstraints();
 		gbc_kategorie_box.gridwidth = 12;
 		gbc_kategorie_box.insets = new Insets(0, 0, 5, 5);
@@ -416,7 +416,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		JButton bestaetigen_btn = new JButton("Hinzufügen bestätigen");
 		bestaetigen_btn.setFont(new Font("Verdana", Font.PLAIN, 16));
-		bestaetigen_btn.setForeground(new Color(64, 116, 161));
+		bestaetigen_btn.setForeground(new Color(0, 69, 129));
 		bestaetigen_btn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent a) {
@@ -544,7 +544,7 @@ public class ProduktHinzufuegenPanel extends JPanel {
 		
 		JButton zuruecksetzen_btn = new JButton("Zurücksetzen");
 		zuruecksetzen_btn.setFont(new Font("Verdana", Font.PLAIN, 16));
-		zuruecksetzen_btn.setForeground(new Color(64, 116, 161));
+		zuruecksetzen_btn.setForeground(new Color(0, 69, 129));
 		zuruecksetzen_btn.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
