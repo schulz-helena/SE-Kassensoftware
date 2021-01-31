@@ -126,7 +126,7 @@ public class test extends JFrame {
 			}
 		});
 		
-		JButton produkteButton = new JButton("Produkte bearbeiten");
+		JButton produkteButton = new JButton("Produkte verwalten");
 		decorateButton(produkteButton, 0, 120, buttonClickedColor, buttonBackgroundColor);
 		panel.add(produkteButton);
 		
@@ -145,7 +145,7 @@ public class test extends JFrame {
 			}
 		});
 		
-		JButton produktsucheButton = new JButton("Produkte suchen");
+		JButton produktsucheButton = new JButton("Produktsuche");
 		decorateButton(produktsucheButton, 0, 180, buttonClickedColor, buttonBackgroundColor);
 		panel.add(produktsucheButton);
 		
