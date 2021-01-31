@@ -24,8 +24,9 @@ import java.awt.event.FocusEvent;
 
 
 /**
- * Die Klasse <code>ProduktsuchePanel</code> erstellt die GUI-Oberfläche 
+ * Die Klasse <code>ProduktsuchePanel</code> erstellt die GUI-Oberflaeche 
  * mit der nach Produkten mit Hilfe ihres Namen oder ihrer EAN gesucht werden kann.
+ * Die gefundenen Produkte werden dann in einer Tabelle gelistet.
  *
  * @author Andreas Niemann
  */
@@ -65,7 +66,7 @@ public class ProduktsuchePanel extends JPanel {
 		    }
 		};
 		
-		model.setColumnIdentifiers(spaltenNamen); // Spaltenüberschriften festlegen
+		model.setColumnIdentifiers(spaltenNamen); // Spaltenueberschriften festlegen
 		
 		table = new JTable(model);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -137,12 +138,12 @@ public class ProduktsuchePanel extends JPanel {
 	/**
 	 * Sucht in der Datenbank nach Produkten mit dem Namen oder der EAN, die im <code>sucheTextfeld</code> eingegeben wurde.
 	 * 
-	 * @param suchString
-	 * @return	
+	 * @param suchString	Suchbegriff mit dem in der Datenbank nach einem Produkt gesucht wird,
+	 * 						kann der Name oder die EAN sein
 	 */
 	public void produktsucheAnzeigen(String suchString) {
 		
-		ArrayList<Produkt> daten = JSONDemo.produktSuchen(suchString);
+		ArrayList<Produkt> daten = Datenverwaltung.produktSuchen(suchString);
 		String eintrag[] = new String[7];
 		
 		// Entferne alle Zeilen aus der Tabelle
@@ -150,7 +151,7 @@ public class ProduktsuchePanel extends JPanel {
 		
 		// Falls Produkte gefunden wurden
 		if (daten.size() != 0) {
-			// Für jedes Produkt füge eine Zeile in der Tabelle hinzu
+			// Fuer jedes Produkt fuege eine Zeile in der Tabelle hinzu
 			for (Produkt element : daten) {
 				eintrag[0] = element.getEan().toString();
 				eintrag[1] = element.getName();
@@ -179,7 +180,7 @@ public class ProduktsuchePanel extends JPanel {
 	
 	
 	/**
-	 * Zeigt <code>table</code> an und lässt <code>emptyLabel</code> verschwinden.
+	 * Zeigt <code>table</code> an und laesst <code>emptyLabel</code> verschwinden.
 	 */
 	private void showTable() {
 		this.add(scrollPane);
@@ -190,7 +191,7 @@ public class ProduktsuchePanel extends JPanel {
 	
 	
 	/**
-	 * Lässt <code>table</code> verschwinden und zeigt das <code>emptyLabel</code> an.
+	 * Laesst <code>table</code> verschwinden und zeigt das <code>emptyLabel</code> an.
 	 */
 	private void disappearTable() {
 		this.add(emptyLabel);
