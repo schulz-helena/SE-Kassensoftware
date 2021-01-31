@@ -1,9 +1,12 @@
+package kassensoftware;
+
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.GridBagConstraints;
+import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Insets;
@@ -16,7 +19,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
 /**
- * Klasse für die GUI des Einkaufs.
+ * Klasse fÃ¼r die GUI des Einkaufs.
  * 
  * @author Nils Kohler
  *
@@ -43,6 +46,7 @@ public class EinkaufPanel extends JPanel {
 
 		JLabel lblNewLabel = new JLabel("Einkauf");
 		lblNewLabel.setFont(new Font("Verdana", Font.BOLD, 20));
+		lblNewLabel.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.fill = GridBagConstraints.VERTICAL;
 		gbc_lblNewLabel.gridwidth = 4;
@@ -52,6 +56,8 @@ public class EinkaufPanel extends JPanel {
 		add(lblNewLabel, gbc_lblNewLabel);
 
 		textField = new JTextField();
+		textField.setFont(new Font("Verdana", Font.PLAIN, 16));
+		textField.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.insets = new Insets(0, 0, 5, 5);
 		gbc_textField.fill = GridBagConstraints.BOTH;
@@ -70,6 +76,7 @@ public class EinkaufPanel extends JPanel {
 		add(scrollPane, gbc_scrollPane);
 
 		JTextArea textArea = new JTextArea();
+		textArea.setFont(new Font("Verdana", Font.PLAIN, 16));
 		scrollPane.setViewportView(textArea);
 		textArea.setEditable(false);
 
@@ -93,7 +100,7 @@ public class EinkaufPanel extends JPanel {
 					textArea.setText(rechnung.rechnungAktualisieren(rech));
 					textField_1.setText(null);
 					textField.setText(null);
-					JOptionPane.showMessageDialog(null, "Das Produkt wurde storniert.", "Bestätigung",
+					JOptionPane.showMessageDialog(null, "Das Produkt wurde storniert.", "BestÃ¤tigung",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
 
@@ -102,12 +109,14 @@ public class EinkaufPanel extends JPanel {
 
 		JLabel lblNewLabel_3 = new JLabel("Name/EAN");
 		lblNewLabel_3.setFont(new Font("Verdana", Font.PLAIN, 16));
+		lblNewLabel_3.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_3.gridx = 2;
 		gbc_lblNewLabel_3.gridy = 1;
 		add(lblNewLabel_3, gbc_lblNewLabel_3);
 		btnNewButton_1.setFont(new Font("Verdana", Font.PLAIN, 16));
+		btnNewButton_1.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.fill = GridBagConstraints.BOTH;
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 0);
@@ -116,6 +125,8 @@ public class EinkaufPanel extends JPanel {
 		add(btnNewButton_1, gbc_btnNewButton_1);
 
 		textField_1 = new JTextField();
+		textField_1.setFont(new Font("Verdana", Font.PLAIN, 16));
+		textField_1.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_1.fill = GridBagConstraints.BOTH;
@@ -126,6 +137,7 @@ public class EinkaufPanel extends JPanel {
 
 		JLabel lblNewLabel_1 = new JLabel("Anzahl");
 		lblNewLabel_1.setFont(new Font("Verdana", Font.PLAIN, 16));
+		lblNewLabel_1.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_1.fill = GridBagConstraints.VERTICAL;
@@ -172,6 +184,7 @@ public class EinkaufPanel extends JPanel {
 			}
 		});
 		btnNewButton.setFont(new Font("Verdana", Font.PLAIN, 16));
+		btnNewButton.setForeground(new Color(0, 69, 129));
 
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
@@ -182,6 +195,8 @@ public class EinkaufPanel extends JPanel {
 		add(btnNewButton, gbc_btnNewButton);
 
 		textField_2 = new JTextField();
+		textField_2.setFont(new Font("Verdana", Font.PLAIN, 16));
+		textField_2.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
 		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_2.fill = GridBagConstraints.BOTH;
@@ -192,6 +207,7 @@ public class EinkaufPanel extends JPanel {
 
 		JLabel lblNewLabel_2 = new JLabel("Kunde Geld");
 		lblNewLabel_2.setFont(new Font("Verdana", Font.PLAIN, 16));
+		lblNewLabel_2.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_2.fill = GridBagConstraints.VERTICAL;
@@ -209,7 +225,7 @@ public class EinkaufPanel extends JPanel {
 						+ String.format("%-25s %-15s %-15s\n", "----------", "-------", "--------");
 				textArea.setText(rechnungHead + "Aktuell werden keine Produkte gekauft.");
 
-				JOptionPane.showMessageDialog(null, "Der Einkauf wurde storniert.", "Bestätigung",
+				JOptionPane.showMessageDialog(null, "Der Einkauf wurde storniert.", "BestÃ¤tigung",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
@@ -223,7 +239,7 @@ public class EinkaufPanel extends JPanel {
 				} else {
 					Float geldNeu = Float.parseFloat(textField_2.getText());
 					if (geldNeu < 0) {
-						JOptionPane.showMessageDialog(null, "Keine negativen Eingaben möglich.", "Fehler",
+						JOptionPane.showMessageDialog(null, "Keine negativen Eingaben mÃ¶glich.", "Fehler",
 								JOptionPane.ERROR_MESSAGE);
 						textField_2.setText(null);
 					} else {
@@ -240,6 +256,7 @@ public class EinkaufPanel extends JPanel {
 			}
 		});
 		btnNewButton_2_1.setFont(new Font("Verdana", Font.PLAIN, 16));
+		btnNewButton_2_1.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_btnNewButton_2_1 = new GridBagConstraints();
 		gbc_btnNewButton_2_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnNewButton_2_1.insets = new Insets(0, 0, 5, 0);
@@ -259,6 +276,7 @@ public class EinkaufPanel extends JPanel {
 			}
 		});
 		btnNewButton_2_1_1.setFont(new Font("Verdana", Font.PLAIN, 16));
+		btnNewButton_2_1_1.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_btnNewButton_2_1_1 = new GridBagConstraints();
 		gbc_btnNewButton_2_1_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnNewButton_2_1_1.insets = new Insets(0, 0, 5, 0);
@@ -266,6 +284,7 @@ public class EinkaufPanel extends JPanel {
 		gbc_btnNewButton_2_1_1.gridy = 6;
 		add(btnNewButton_2_1_1, gbc_btnNewButton_2_1_1);
 		btnNewButton_3.setFont(new Font("Verdana", Font.PLAIN, 16));
+		btnNewButton_3.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
 		gbc_btnNewButton_3.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnNewButton_3.anchor = GridBagConstraints.SOUTH;
@@ -278,7 +297,7 @@ public class EinkaufPanel extends JPanel {
 	/**
 	 * Methode um den Bestand eines Produktes zu aktualisieren. Es wird nach dem
 	 * Sonderzustand n gesucht und dann das Produktgewicht reduziert, sonst der
-	 * Bestand. Das Produkt mit den "alten" Angaben wird überschrieben.
+	 * Bestand. Das Produkt mit den "alten" Angaben wird Ã¼berschrieben.
 	 * 
 	 * @param rech2 HashMap beinhaltet das Produkt und die Anzahl die gekauft werden
 	 *              soll.
@@ -287,7 +306,7 @@ public class EinkaufPanel extends JPanel {
 		for (Map.Entry<Produkt, String> entry : rech2.entrySet()) {
 			Produkt key = entry.getKey();
 			String value = entry.getValue();
-			// Sonderzustand n überprüft
+			// Sonderzustand n Ã¼berprÃ¼ft
 			if (key.getAnzahl().compareTo("n") == 0) {
 				Float anzAlt = key.getGewicht();
 				Float anzAenderUm = Float.parseFloat(value);
@@ -311,7 +330,7 @@ public class EinkaufPanel extends JPanel {
 	 * Methode um ein Produkt mittels <code>ean</code> oder <code>name</code> zu
 	 * finden.
 	 * 
-	 * @param s enthält <code>ean</code> oder <code>name</code>
+	 * @param s enthÃ¤lt <code>ean</code> oder <code>name</code>
 	 * @return <code>ArrayList</code> mit gefundenen Produkten oder leere
 	 *         <code>ArrayList</code>
 	 */
