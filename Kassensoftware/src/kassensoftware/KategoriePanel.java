@@ -1,6 +1,9 @@
+package kassensoftware;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
@@ -13,7 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 /**
- * Klasse zum erzeugen der GUI für hinzufügen, löschen und Anzeigen von
+ * Klasse zum erzeugen der GUI fÃ¼r hinzufÃ¼gen, lÃ¶schen und Anzeigen von
  * <code>Kategorie</code>.
  * 
  * @author Nils Kohler
@@ -41,6 +44,7 @@ public class KategoriePanel extends JPanel {
 
 		JLabel lblNewLabel = new JLabel("Kategorie");
 		lblNewLabel.setFont(new Font("Verdana", Font.BOLD, 20));
+		lblNewLabel.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.fill = GridBagConstraints.VERTICAL;
 		gbc_lblNewLabel.gridwidth = 11;
@@ -50,6 +54,8 @@ public class KategoriePanel extends JPanel {
 		add(lblNewLabel, gbc_lblNewLabel);
 
 		textField = new JTextField();
+		textField.setFont(new Font("Verdana", Font.PLAIN, 16));
+		textField.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.gridwidth = 4;
 		gbc_textField.fill = GridBagConstraints.BOTH;
@@ -75,7 +81,7 @@ public class KategoriePanel extends JPanel {
 				if (name.length() > 2 && name.length() < 32 && b == true) {
 					k1 = new Kategorie(name);
 					JSONDemo.kategorieSpeichern(k1);
-					JOptionPane.showMessageDialog(null, "Kategorie erfolgreich hinzugefügt.");
+					JOptionPane.showMessageDialog(null, "Kategorie erfolgreich hinzugefÃ¼gt.");
 					textField.setText(null);
 				} else if (name.length() <= 2) {
 					JOptionPane.showMessageDialog(null, "Die eingegebene Kategorie ist zu kurz.",
@@ -88,6 +94,7 @@ public class KategoriePanel extends JPanel {
 			}
 		});
 		btnNewButton.setFont(new Font("Verdana", Font.PLAIN, 16));
+		btnNewButton.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.fill = GridBagConstraints.BOTH;
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
@@ -96,6 +103,8 @@ public class KategoriePanel extends JPanel {
 		add(btnNewButton, gbc_btnNewButton);
 
 		JTextArea textArea = new JTextArea();
+		textArea.setFont(new Font("Verdana", Font.PLAIN, 16));
+		textArea.setForeground(new Color(0, 69, 129));
 		textArea.setEditable(false);
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.gridheight = 6;
@@ -118,6 +127,7 @@ public class KategoriePanel extends JPanel {
 			}
 		});
 		btnKategorienAnzeigen.setFont(new Font("Verdana", Font.PLAIN, 16));
+		btnKategorienAnzeigen.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_btnKategorienAnzeigen = new GridBagConstraints();
 		gbc_btnKategorienAnzeigen.anchor = GridBagConstraints.NORTH;
 		gbc_btnKategorienAnzeigen.fill = GridBagConstraints.HORIZONTAL;
@@ -127,6 +137,8 @@ public class KategoriePanel extends JPanel {
 		add(btnKategorienAnzeigen, gbc_btnKategorienAnzeigen);
 
 		textField_1 = new JTextField();
+		textField_1.setFont(new Font("Verdana", Font.PLAIN, 16));
+		textField_1.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.gridwidth = 4;
 		gbc_textField_1.insets = new Insets(0, 0, 0, 5);
@@ -143,7 +155,7 @@ public class KategoriePanel extends JPanel {
 				kName = textField_1.getText();
 				if (findKategorieInProdukt(kName) == true) {
 					JOptionPane.showMessageDialog(null, "Die eingegebene Kategorie ist noch einem Produkt zugeordnet.",
-							"Fehler bei Kategorie-Löschung", JOptionPane.ERROR_MESSAGE);
+							"Fehler bei Kategorie-LÃ¶schung", JOptionPane.ERROR_MESSAGE);
 				} else {
 					for (Kategorie kat : JSONDemo.getAlleKategorien()) {
 						if (kat.getKategorieName().compareTo(kName) == 0) {
@@ -156,13 +168,14 @@ public class KategoriePanel extends JPanel {
 				}
 				if (i == JSONDemo.getAlleKategorien().size()) {
 					JOptionPane.showMessageDialog(null, "Die Kategorie konnte nicht gefunden werden.",
-							"Fehler bei Kategorie-Löschung", JOptionPane.ERROR_MESSAGE);
+							"Fehler bei Kategorie-LÃ¶schung", JOptionPane.ERROR_MESSAGE);
 					textField_1.setText(null);
 				}
 
 			}
 		});
 		btnKategorienAnzeigen_1.setFont(new Font("Verdana", Font.PLAIN, 16));
+		btnKategorienAnzeigen_1.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_btnKategorienAnzeigen_1 = new GridBagConstraints();
 		gbc_btnKategorienAnzeigen_1.fill = GridBagConstraints.BOTH;
 		gbc_btnKategorienAnzeigen_1.insets = new Insets(0, 0, 0, 5);
