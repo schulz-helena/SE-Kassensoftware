@@ -42,7 +42,7 @@ public class KategoriePanel extends JPanel {
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
-		JLabel lblNewLabel = new JLabel("Kategorie");
+		JLabel lblNewLabel = new JLabel("Kategorien");
 		lblNewLabel.setFont(new Font("Verdana", Font.BOLD, 20));
 		lblNewLabel.setForeground(new Color(0, 69, 129));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
