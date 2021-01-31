@@ -1,6 +1,6 @@
 package kassensoftware;
 
-//package de
+//package
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -30,7 +30,7 @@ public class test extends JFrame {
 	private ProduktHinzufuegenPanel neuesProduktPanel;
 	private KategoriePanel kategoriePanel;
 	private EinkaufPanel einkaufPanel;
-	private ProduktAnzeigenPanel produktAnzeigenPanel;
+	private ProduktsuchePanel produktsuchePanel;
 	
 	// Schriftart und Schriftfarbe festlegen
 	private Color panelBackgroundColor = new Color(0, 69, 129);
@@ -77,7 +77,7 @@ public class test extends JFrame {
 		neuesProduktPanel = new ProduktHinzufuegenPanel();
 		kategoriePanel = new KategoriePanel();
 		einkaufPanel = new EinkaufPanel();
-		produktAnzeigenPanel = new ProduktAnzeigenPanel();
+		produktsuchePanel = new ProduktsuchePanel();
 		
 		JPanel topPanel = new JPanel();
 		topPanel.setLayout(new BorderLayout(0, 0));
@@ -126,11 +126,11 @@ public class test extends JFrame {
 			}
 		});
 		
-		JButton neueProdukteButton = new JButton("Neue Produkte");
-		decorateButton(neueProdukteButton, 0, 120, buttonClickedColor, buttonBackgroundColor);
-		panel.add(neueProdukteButton);
+		JButton produkteButton = new JButton("Produkte bearbeiten");
+		decorateButton(produkteButton, 0, 120, buttonClickedColor, buttonBackgroundColor);
+		panel.add(produkteButton);
 		
-		neueProdukteButton.addActionListener(new ActionListener ()
+		produkteButton.addActionListener(new ActionListener ()
 		{ 
 			public void actionPerformed(ActionEvent e)
 			{
@@ -145,22 +145,16 @@ public class test extends JFrame {
 			}
 		});
 		
-		JButton produkteAnzeigenButton = new JButton("Produkte einsehen");
-		decorateButton(produkteAnzeigenButton, 0, 180, buttonClickedColor, buttonBackgroundColor);
-		panel.add(produkteAnzeigenButton);
+		JButton produktsucheButton = new JButton("Produkte suchen");
+		decorateButton(produktsucheButton, 0, 180, buttonClickedColor, buttonBackgroundColor);
+		panel.add(produktsucheButton);
 		
-		produkteAnzeigenButton.addActionListener(new ActionListener ()
+		produktsucheButton.addActionListener(new ActionListener ()
 		{ 
 			public void actionPerformed(ActionEvent e)
 			{
-				if (!passwordValid) {
-					enterWithPassword(produktAnzeigenPanel);
-				}
-				else {
-					aktualisieren(produktAnzeigenPanel);
-				}
-				
-				produktAnzeigenPanel.refresh();
+				aktualisieren(produktsuchePanel);
+				produktsuchePanel.refresh();
 			}
 		});
 		
@@ -217,7 +211,7 @@ public class test extends JFrame {
 		// alle aktiven Panels entfernen
 		contentPane.remove(startPanel);
 		contentPane.remove(neuesProduktPanel);
-		contentPane.remove(produktAnzeigenPanel);
+		contentPane.remove(produktsuchePanel);
 		contentPane.remove(kategoriePanel);
 		contentPane.remove(einkaufPanel);
 		
