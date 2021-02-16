@@ -22,7 +22,7 @@ public class Produkt {
 	 * @param anzahl	Bestand des Produkts im Lager
 	 * @param kategorie	Kategorie, die dem Produkt zugeordnet wird
 	 */
-	Produkt(String name, String ean, Float preis, Float gewicht, String anzahl, Kategorie kategorie) {
+	public Produkt(String name, String ean, Float preis, Float gewicht, String anzahl, Kategorie kategorie) {
 		this.name = name;
 		this.ean = ean;
 		this.preis = preis;
