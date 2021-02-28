@@ -1,21 +1,22 @@
 package test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import kassensoftware.Datenverwaltung;
-import kassensoftware.Produkt;
 import kassensoftware.Kategorie;
-import java.util.ArrayList;
+import kassensoftware.Produkt;
+import kassensoftware.ProduktPanel;
 
 
 /**
- * Die Klasse <code>SucheTest</code> testet die Produktsuche mithilfe der EAN und dem Namen.
+ * 
+ * Die Klasse <code>EindeutigkeitEANTest</code> testet die Eindeutigkeit der EAN.
  *
  */
-public class SucheTest {
+public class EindeutigkeitEANTest {
 	@Before
 	public void setUp() {
 		// Beispielprodukte speichern
@@ -42,33 +43,15 @@ public class SucheTest {
 	
 	
 	/**
-	 * Testet die Suchfunktion durch Eingabe eines Produktnamens.
+	 * Testet die Eindeutigkeit der EAN bei der Produkterstellung.
 	 */
 	@Test
-	public void testSucheNachName() {
-		String name = "Zucker";
-		
-		ArrayList<Produkt> suchergebnisse = Datenverwaltung.produktSuchen(name);
-		assertTrue(suchergebnisse.size() == 2);
-		
-		for (Produkt eintrag : suchergebnisse) {
-			assertTrue(eintrag.getName().contains(name));
-		}
-	}
-	
-	
-	/**
-	 * Testet die Suchfunktion durch Eingabe der EAN eines Produktes.
-	 */
-	@Test
-	public void testSucheNachEAN() {
-		String ean = "4532";
-		
-		ArrayList<Produkt> suchergebnisse = Datenverwaltung.produktSuchen(ean);
-		assertTrue(suchergebnisse.size() == 1);
-		
-		for (Produkt eintrag : suchergebnisse) {
-			assertTrue(eintrag.getEan().subSequence(0, 4).toString().equals(ean));
-		}
+	public void testEANVorhanden() {
+		/*
+		 * Leere Dummyfunktion eanVorhanden() verwendet, da bei uns keine Funktion existiert, die
+		 * die Eindeutigkeit der EAN direkt ueberprueft. All das spielt sich im ActionListener
+		 * des bestaetigen_btn ab, ist also zu stark mit der GUI gekoppelt.
+		 */
+		assertFalse(ProduktPanel.eanVergeben());
 	}
 }
