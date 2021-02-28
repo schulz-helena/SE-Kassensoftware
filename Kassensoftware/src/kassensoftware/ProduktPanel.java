@@ -720,40 +720,13 @@ public class ProduktPanel extends JPanel {
 	}
 	
 	
-	public static boolean pruefeName(String name) {
-		int length = name.length();
-		
-		if (length == 0 || length > 32 || (length > 0 && length < 2)) {
-			return false;
-		}
-		
-		for (int i = 0; i < length; i++) {
-			if (Character.isDigit(name.charAt(i))) {
-		        return false;
-		    }
-		}
-		
-		return true;
-	}
-	
-	
-	public static boolean pruefeEan(String ean) {
-		int length = ean.length();
-		
-		if (length == 0 || length > 13) {
-			return false;
-		}
-
-		for (int i = 0; i < length; i++) {
-	        if (Character.isDigit(ean.charAt(i)) == false) {
-	        	return false;
-	        }
-	    }
-		
-		return true;
-	}
-	
-	
+	/**
+	 * Ueberprueft, ob ein korrekter Preis eingegeben wurde.
+	 * 
+	 * @param preisString, Eingabe fuer den Preis
+	 * @return <code>true</code>, falls der Preis ein gueltiges Format hat;
+	 * 			sonst <code>false</code>.
+	 */
 	public static boolean pruefePreis(String preisString) {
 		Float preis = 0.0f;
 		
@@ -780,85 +753,10 @@ public class ProduktPanel extends JPanel {
 	}
 	
 	
-	public static boolean pruefeGewicht(String gewichtsString, String einheit) {
-		Float gewicht = 0.0f;
-		
-		if (gewichtsString.length() == 0) {
-			return false;
-		}
-		
-		if (gewichtsString.indexOf(',') != -1) {
-			gewichtsString = gewichtsString.replace(',', '.');
-		}
-		
-		
-		try {
-			gewicht = Float.parseFloat(gewichtsString);
-		}
-		catch (Exception e) {
-			return false;
-		}
-		
-		if (einheit == "kg" && gewicht < 0.001 && gewicht > 0) {
-			return false;
-		}
-		else if (einheit == "kg" && gewicht > 100) {
-			return false;
-		}
-		else if (einheit == "g" && gewicht < 1 && gewicht > 0) {
-			return false;
-		}
-		else if (einheit == "g" && gewicht > 100000) {
-			return false;
-		}
-		else if (einheit == "l" && gewicht < 0.001 && gewicht > 0) {
-			return false;
-		}
-		else if (einheit == "l" && gewicht > 10) {
-			return false;
-		}
-		else if (einheit == "ml" && gewicht < 1 && gewicht > 0) {
-			return false;
-		}
-		else if (einheit == "ml" && gewicht > 10000) {
-			return false;
-		}
-		
-		return true;
-	}
-	
-	
-	public static boolean pruefeAnzahl(String anzahlString) {
-		int anzahl = 0;
-		
-		if (anzahlString.length() == 0) {
-			return false;
-		}
-		
-		try {
-			anzahl = Integer.parseInt(anzahlString);
-		}
-		catch (Exception e) {
-			return false;
-		}
-		
-		if (anzahl > 1000) {
-			return false;
-		}
-		
-		return true;
-	}
-	
-	
-	public static boolean pruefeKategorie(String kategoriename) {
-		if (kategoriename.length() == 0) {
-			return false;
-		}
-		
-		if (Datenverwaltung.getKategorie(kategoriename) == null) {
-			return false;
-		}
-		
-		return true;
+	/**
+	 * Dummyfunktion zum Testen der EAN.
+	 */
+	public static boolean eanVergeben() {
+		return false;
 	}
 }
