@@ -1,3 +1,4 @@
+package kassensoftware;
 
 import java.util.ArrayList;
 
@@ -23,9 +24,9 @@ public class Einkaufsliste {
 	}
 
 	/**
-	 * Ein Produkt wird der <code>einkaufsliste</code> hinzugefügt.
+	 * Ein Produkt wird der <code>einkaufsliste</code> hinzugefï¿½gt.
 	 * 
-	 * @param produktNeu beinhaltet zu übergebendes Produkt von Typ
+	 * @param produktNeu beinhaltet zu ï¿½bergebendes Produkt von Typ
 	 *                   <code>Produkt</code>
 	 */
 	public void produktHinzufuegen(Produkt produktNeu) {
@@ -66,9 +67,9 @@ public class Einkaufsliste {
 	}
 
 	/**
-	 * Methode zum löschen eines Produkts aus der <code>einkaufsliste</code>.
+	 * Methode zum lï¿½schen eines Produkts aus der <code>einkaufsliste</code>.
 	 * 
-	 * @param produktName des zu löschenden Produkts
+	 * @param produktName des zu lï¿½schenden Produkts
 	 */
 	public void produktStornieren(String produktName) {
 		if (sucheProdukt(produktName) == true) {
@@ -77,7 +78,7 @@ public class Einkaufsliste {
 	}
 
 	/**
-	 * Methode zum löschen aller Elemente der <code>einkaufsliste</code>.
+	 * Methode zum lï¿½schen aller Elemente der <code>einkaufsliste</code>.
 	 */
 	public void einkaufStornieren() {
 		einkaufsliste.clear();

@@ -1,6 +1,7 @@
+package kassensoftware;
 
 /**
- * Mehtode zum erzeugen einer <code>Kategorie</code> und deren Verwaltung.
+ * Methode zum Erzeugen einer <code>Kategorie</code> und deren Verwaltung.
  * 
  * @author Nils Kohler
  *
@@ -19,7 +20,7 @@ public class Kategorie {
 	}
 
 	/**
-	 * <code>Getter</code> für <code>kategorieName</code>.
+	 * <code>Getter</code> fï¿½r <code>kategorieName</code>.
 	 * 
 	 * @return kategorieName der Kategorie als <code>String</code>
 	 */
@@ -28,7 +29,7 @@ public class Kategorie {
 	}
 
 	/**
-	 * Setter für <code>kategorieName</code>.
+	 * Setter fï¿½r <code>kategorieName</code>.
 	 * 
 	 * @param kategorieName neuer Name einer <code>Kategorie</code>
 	 */

@@ -1,4 +1,5 @@
-package Main;
+package kassensoftware;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,10 +36,10 @@ public class Rechnung {
 	}
 
 	/**
-	 * Das gegebene Geld des Kunden wird hier im späteren Programmablauf
+	 * Das gegebene Geld des Kunden wird hier im spï¿½teren Programmablauf
 	 * aktualisiert.
 	 * 
-	 * @param geldNeu wird aus der GUI übergeben
+	 * @param geldNeu wird aus der GUI ï¿½bergeben
 	 */
 	public void setBrieftasche(Float geldNeu) {
 		this.brieftasche = geldNeu;
@@ -46,11 +47,11 @@ public class Rechnung {
 
 	/**
 	 * Die Abschlussrechnung wird erstellt. Unterschied zur Zwischenrechnung ist der
-	 * Bezahlvorgang des Kunden. Die <code>einkaufliste</code> wird anschließend
-	 * wieder zurückgesetzt und ein neuer Einkauf kann gestartet werden.
+	 * Bezahlvorgang des Kunden. Die <code>einkaufliste</code> wird anschlieï¿½end
+	 * wieder zurï¿½ckgesetzt und ein neuer Einkauf kann gestartet werden.
 	 * 
 	 * @param rech HashMap mit <code>produkt p</code> das gekauft werden soll und
-	 *             der dazugehörigen <code>anzahl</code>
+	 *             der dazugehï¿½rigen <code>anzahl</code>
 	 */
 	public void rechnungErstellen(HashMap<Produkt, String> rech) {
 		rechnungHead = "";
@@ -89,7 +90,7 @@ public class Rechnung {
 			rechnungEnd = "---------------------------------------------\n"
 					+ String.format("%34s %6.2f EUR\n", "Gesamtsumme: ", gesamtSumme)
 					+ String.format("%34s %6.2f EUR\n", "Erhalten: ", brieftasche)
-					+ String.format("%34s %6.2f EUR\n", "Rückgeld: ", rueckgeld);
+					+ String.format("%34s %6.2f EUR\n", "Rï¿½ckgeld: ", rueckgeld);
 
 		}
 
@@ -97,12 +98,12 @@ public class Rechnung {
 
 	/**
 	 * Die Rechnung wird aktualisiert werden, immer wenn ein neues
-	 * <code>produkt</code> der <code>einkaufsliste</code> hinzugefügt wurde. Die
+	 * <code>produkt</code> der <code>einkaufsliste</code> hinzugefï¿½gt wurde. Die
 	 * <code>zwischensumme</code> wird auch ausgegeben.
 	 * 
 	 * @param rech <code>HashMap</code> mit <code>produkt p</code> die gekauft
-	 *             werden sollen und der dazugehörigen <code>anzahl</code>
-	 * @return String: Zwischenrechnung wird als String zurückgegeben
+	 *             werden sollen und der dazugehï¿½rigen <code>anzahl</code>
+	 * @return String: Zwischenrechnung wird als String zurï¿½ckgegeben
 	 */
 	public String rechnungAktualisieren(HashMap<Produkt, String> rech) {
 		temp = (String.format("%-23s %-12s %-15s", "Produkt", "Anzahl", "Preis"));
@@ -147,7 +148,7 @@ public class Rechnung {
 
 	/**
 	 * Der <code>rechnungBody</code> der Rechnung wird aus einer
-	 * <code>ArrayList</code> in einen String überführt.
+	 * <code>ArrayList</code> in einen String ï¿½berfï¿½hrt.
 	 * 
 	 * @param r <code>ArrayList</code> mit <code>produkten</code>,
 	 *          <code>anzahl</code> und <code>zwischensumme</code>
@@ -163,7 +164,7 @@ public class Rechnung {
 
 	/**
 	 * Methode umd den finalen Kassenbong zu erstellen. <code>rechnungHead</code>,
-	 * <code>rechnungBody</code> und <code>rechnungEnd</code> wird zusammengefügt.
+	 * <code>rechnungBody</code> und <code>rechnungEnd</code> wird zusammengefï¿½gt.
 	 * 
 	 * @return r Gesamtrechnung
 	 */
@@ -183,7 +184,7 @@ public class Rechnung {
 	 * 
 	 * @param p    <code>Produkt</code>
 	 * @param rech <code>HashMap</code> mit <code>produkt p</code> die gekauft
-	 *             werden sollen und der dazugehörigen <code>anzahl</code>
+	 *             werden sollen und der dazugehï¿½rigen <code>anzahl</code>
 	 * @return value <code>anzahl</code> die von <code>Produkt p</code> gekauft
 	 *         werden soll
 	 */

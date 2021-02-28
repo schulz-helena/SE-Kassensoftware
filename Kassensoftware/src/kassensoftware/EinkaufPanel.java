@@ -1,4 +1,4 @@
-package Main;
+package kassensoftware;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -19,7 +19,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
 /**
- * Klasse für die GUI des Einkaufs.
+ * Klasse fï¿½r die GUI des Einkaufs.
  * 
  * @author Nils Kohler
  *
@@ -100,7 +100,7 @@ public class EinkaufPanel extends JPanel {
 					textArea.setText(rechnung.rechnungAktualisieren(rech));
 					textField_1.setText(null);
 					textField.setText(null);
-					JOptionPane.showMessageDialog(null, "Das Produkt wurde storniert.", "Bestätigung",
+					JOptionPane.showMessageDialog(null, "Das Produkt wurde storniert.", "Bestï¿½tigung",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
 
@@ -231,7 +231,7 @@ public class EinkaufPanel extends JPanel {
 						+ String.format("%-25s %-15s %-15s\n", "----------", "-------", "--------");
 				textArea.setText(rechnungHead + "Aktuell werden keine Produkte gekauft.");
 
-				JOptionPane.showMessageDialog(null, "Der Einkauf wurde storniert.", "Bestätigung",
+				JOptionPane.showMessageDialog(null, "Der Einkauf wurde storniert.", "Bestï¿½tigung",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
@@ -245,7 +245,7 @@ public class EinkaufPanel extends JPanel {
 				} else {
 					Float geldNeu = Float.parseFloat(textField_2.getText());
 					if (geldNeu < 0) {
-						JOptionPane.showMessageDialog(null, "Keine negativen Eingaben möglich.", "Fehler",
+						JOptionPane.showMessageDialog(null, "Keine negativen Eingaben mï¿½glich.", "Fehler",
 								JOptionPane.ERROR_MESSAGE);
 						textField_2.setText(null);
 					} else {
@@ -302,7 +302,7 @@ public class EinkaufPanel extends JPanel {
 	/**
 	 * Methode um den Bestand eines Produktes zu aktualisieren. Es wird nach dem
 	 * Sonderzustand n gesucht und dann das Produktgewicht reduziert, sonst der
-	 * Bestand. Das Produkt mit den "alten" Angaben wird überschrieben.
+	 * Bestand. Das Produkt mit den "alten" Angaben wird ï¿½berschrieben.
 	 * 
 	 * @param rech2 HashMap beinhaltet das Produkt und die Anzahl die gekauft werden
 	 *              soll.
@@ -313,7 +313,7 @@ public class EinkaufPanel extends JPanel {
 			Produkt key = entry.getKey();
 			String value = entry.getValue();
 
-			// Sonderzustand n überprüft
+			// Sonderzustand n ï¿½berprï¿½ft
 			if (key.getAnzahl().compareTo("n") == 0) {
 				Float anzAlt = key.getGewicht();
 				Float anzAenderUm = Float.parseFloat(value);
@@ -351,7 +351,7 @@ public class EinkaufPanel extends JPanel {
 	 * Methode um ein Produkt mittels <code>ean</code> oder <code>name</code> zu
 	 * finden.
 	 * 
-	 * @param s enthält <code>ean</code> oder <code>name</code>
+	 * @param s enthï¿½lt <code>ean</code> oder <code>name</code>
 	 * @return <code>ArrayList</code> mit gefundenen Produkten oder leere
 	 *         <code>ArrayList</code>
 	 */

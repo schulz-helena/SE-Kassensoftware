@@ -1,4 +1,4 @@
-package Main;
+package kassensoftware;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -16,7 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 /**
- * Klasse zum erzeugen der GUI für hinzufügen, löschen und Anzeigen von
+ * Klasse zum erzeugen der GUI fï¿½r hinzufï¿½gen, lï¿½schen und Anzeigen von
  * <code>Kategorie</code>.
  * 
  * @author Nils Kohler
@@ -81,7 +81,7 @@ public class KategoriePanel extends JPanel {
 				if (name.length() > 2 && name.length() < 32 && b == true) {
 					k1 = new Kategorie(name);
 					Datenverwaltung.kategorieSpeichern(k1);
-					JOptionPane.showMessageDialog(null, "Kategorie erfolgreich hinzugefügt.");
+					JOptionPane.showMessageDialog(null, "Kategorie erfolgreich hinzugefï¿½gt.");
 					textField.setText(null);
 				} else if (name.length() <= 2) {
 					JOptionPane.showMessageDialog(null, "Die eingegebene Kategorie ist zu kurz.",
@@ -155,7 +155,7 @@ public class KategoriePanel extends JPanel {
 				kName = textField_1.getText();
 				if (findKategorieInProdukt(kName) == true) {
 					JOptionPane.showMessageDialog(null, "Die eingegebene Kategorie ist noch einem Produkt zugeordnet.",
-							"Fehler bei Kategorie-Löschung", JOptionPane.ERROR_MESSAGE);
+							"Fehler bei Kategorie-Lï¿½schung", JOptionPane.ERROR_MESSAGE);
 				} else {
 					for (Kategorie kat : Datenverwaltung.getAlleKategorien()) {
 						if (kat.getKategorieName().compareTo(kName) == 0) {
@@ -168,7 +168,7 @@ public class KategoriePanel extends JPanel {
 				}
 				if (i == Datenverwaltung.getAlleKategorien().size()) {
 					JOptionPane.showMessageDialog(null, "Die Kategorie konnte nicht gefunden werden.",
-							"Fehler bei Kategorie-Löschung", JOptionPane.ERROR_MESSAGE);
+							"Fehler bei Kategorie-Lï¿½schung", JOptionPane.ERROR_MESSAGE);
 					textField_1.setText(null);
 				}
 
